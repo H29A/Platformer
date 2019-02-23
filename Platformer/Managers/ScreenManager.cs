@@ -14,10 +14,8 @@ namespace Platformer
     {
         ContentManager content;
 
-        //Экран, который в данный момент отображается
         Screen currentScreen;
 
-        //Новый экран который  будет отображен
         Screen newScreen;
 
         InputManager inputManager;
@@ -26,13 +24,10 @@ namespace Platformer
 
         private ScreenManager() { }
 
-        //В этом LIFO стеке хранится история открытия экранов (последний вошел - первый вышел)
         public static Stack<Screen> screenStack = new Stack<Screen>();
 
-        //Высота и ширина отображаемого окна
         Vector2 dimensions;
 
-        //Юзаем сингтон паттерн, ибо экран должен гарантированно один за life cycle приложения
         public static ScreenManager Instance
         {
             get

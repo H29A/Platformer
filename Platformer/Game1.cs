@@ -18,13 +18,14 @@ namespace Platformer
         protected override void Initialize()
         {
             ScreenManager.Instance.Initialize();
-            ScreenManager.Instance.Dimensions = new Vector2(1024, 720);
+            ScreenManager.Instance.Dimensions = new Vector2(1024, 800);
 
             IsMouseVisible = true;
 
             graphics.PreferredBackBufferWidth = (int)ScreenManager.Instance.Dimensions.X;
             graphics.PreferredBackBufferHeight = (int)ScreenManager.Instance.Dimensions.Y;
             graphics.ApplyChanges();
+
             base.Initialize();
         }
 

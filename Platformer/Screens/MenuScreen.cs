@@ -32,6 +32,8 @@ namespace Platformer
             scoresButton = new TextureManager(Values.txtScoresButton, Values.scoresButtonPosition);
 
             nameTextbox = new TextureManager(Values.txtTextbox, Values.nameTextboxPosition);
+
+            sptMenuCat.Position = Values.menuCatPosition;
         }
 
         public override void LoadContent(ContentManager Content, InputManager inputManager)
@@ -51,6 +53,7 @@ namespace Platformer
         public override void UnloadContent()
         {
             base.UnloadContent();
+            content.Unload();
         }
 
         private bool IsClickedOn(TextureManager item)
@@ -142,7 +145,7 @@ namespace Platformer
             inputManager.Update();
             IsLetterEntered(inputManager.KeyState.GetPressedKeys());
 
-            sptMenuCat.Update(gameTime, ScreenManager.Instance.Dimensions / 4);
+            sptMenuCat.Update(gameTime);
 
             if (IsClickedOn(playButton) && (Player.Instance.PlayerName != string.Empty))
             {
@@ -163,13 +166,13 @@ namespace Platformer
             spriteBatch.GraphicsDevice.Clear(Color.Black);
 
             txtBackground.Draw(spriteBatch);
-            sptMenuCat.Draw(spriteBatch);
+            nameTextbox.Draw(spriteBatch);
+            sptMenuCat.Draw(spriteBatch, 0);
 
             playButton.Draw(spriteBatch);
             exitButton.Draw(spriteBatch);
             scoresButton.Draw(spriteBatch);
 
-            nameTextbox.Draw(spriteBatch);
             spriteBatch.DrawString(font, Player.Instance.PlayerName, Values.descriptorPosition, new Color(228, 209, 209));
         }
     }

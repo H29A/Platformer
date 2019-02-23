@@ -16,19 +16,25 @@ namespace Platformer
         int millisecondsPerFrame = 80;
 
         readonly string path;
-        readonly Vector2 frameSize; //Размер фрейма X Y pixels
-        readonly Point tilesMatrix; //Матрица
+        readonly Vector2 frameSize;
+        readonly Point tilesMatrix;
 
-        Texture2D texture; //Спрайт
+        Vector2 position;
+        public Vector2 Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+
+
+        Texture2D texture;
         public Texture2D Texture
         {
             get { return texture; }
             private set { }
         }
 
-        Vector2 position; //Позиция анимации X Y coords
-
-        Point currentFrame = new Point(0, 0); //Текущий кадр из матрицы
+        Point currentFrame = new Point(0, 0);
         public Point CurrentFrame
         {
             get { return currentFrame; }
@@ -64,26 +70,7 @@ namespace Platformer
             }
         }
 
-        public void Update(GameTime gameTime, Vector2 position)
-        {
-            this.position = position;
-
-            timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
-            if (timeSinceLastFrame > millisecondsPerFrame)
-            {
-                timeSinceLastFrame -= millisecondsPerFrame;
-                ++currentFrame.X;
-                if (currentFrame.X >= tilesMatrix.X)
-                {
-                    currentFrame.X = 0;
-                    ++currentFrame.Y;
-                    if (currentFrame.Y >= tilesMatrix.Y)
-                        currentFrame.Y = 0;
-                }
-            }
-        }
-
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public void Draw(SpriteBatch spriteBatch, SpriteEffects direction)
         {
             spriteBatch.Draw
                 (
@@ -100,29 +87,7 @@ namespace Platformer
                     0,
                     Vector2.Zero,
                     1,
-                    SpriteEffects.None,
-                    0
-               );
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw
-                (
-                    this.texture,
-                    new Vector2(position.X, position.Y),
-                    new Rectangle
-                        (
-                            Convert.ToInt32(currentFrame.X * frameSize.X),
-                            Convert.ToInt32(currentFrame.Y * frameSize.Y),
-                            Convert.ToInt32(frameSize.X),
-                            Convert.ToInt32(frameSize.Y)
-                        ),
-                    Color.White,
-                    0,
-                    Vector2.Zero,
-                    1,
-                    SpriteEffects.None,
+                    direction,
                     0
                );
         }

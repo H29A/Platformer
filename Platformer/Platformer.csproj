@@ -41,8 +41,11 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Block.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Managers\TextureManager.cs" />
+    <Compile Include="Managers\XmlManager.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Values.cs" />
     <Compile Include="Game1.cs" />

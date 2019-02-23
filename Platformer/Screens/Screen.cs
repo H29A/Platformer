@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Platformer
 {
-    public class Screen //abstract class
+    public abstract class Screen
     {
         public static SpriteFont font;
         protected ContentManager content;

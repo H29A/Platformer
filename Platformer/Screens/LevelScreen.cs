@@ -12,15 +12,19 @@ namespace Platformer
 {
     public class LevelScreen : Screen
     {
+        Map map;
+
         public LevelScreen()
         {
-
+            map = new Map();
         }
 
         public override void LoadContent(ContentManager Content, InputManager inputManager)
         {
             base.LoadContent(Content, inputManager);
             Player.Instance.LoadContent(Content);
+
+            map.LoadContent(content);
         }
 
         public override void UnloadContent()
@@ -37,6 +41,7 @@ namespace Platformer
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.GraphicsDevice.Clear(Color.LightBlue);
+            map.Draw(spriteBatch);
             Player.Instance.Draw(spriteBatch);
         }
     }

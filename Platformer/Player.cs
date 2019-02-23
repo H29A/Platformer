@@ -13,12 +13,7 @@ namespace Platformer
 {
     public class Player
     {
-        //Texture2D sprite;
-        //public Texture2D Sprite
-        //{
-        //    get { return sprite; }
-        //    private set { }
-        //}
+        bool movingLeft;
 
         string playerName = string.Empty;
         public string PlayerName
@@ -27,15 +22,14 @@ namespace Platformer
             set { playerName = value; }
         }
 
-        Vector2 position;
+        Vector2 position = Values.playerStartPosition;
         public Vector2 Position
         {
             get { return position; }
             private set { }
         }
 
-        //AnimationManager sptPlayer;
-        TextureManager txt;
+        AnimationManager sptPlayer;
 
         private static Player instance;
         public static Player Instance
@@ -50,19 +44,48 @@ namespace Platformer
 
         private Player()
         {
-            //sptPlayer = new AnimationManager(Values.sptPlayer, Values.playerFrameSize, Values.playerTiles);
-            position = Values.playerStartPosition;
-            txt = new TextureManager(Values.txtTextbox, Values.playerStartPosition);
+            sptPlayer = new AnimationManager(Values.sptPlayer, Values.playerFrameSize, Values.playerTiles);
+            sptPlayer.Position = position;
+        }
+
+        private bool IsCollide(Texture2D sprite1, Texture2D sprite2, Rectangle player, Rectangle item)
+        {
+            Color[] colorData1 = new Color[sprite1.Width * sprite1.Height];
+            Color[] colorData2 = new Color[sprite2.Width * sprite2.Height];
+            sprite1.GetData<Color>(colorData1);
+            sprite2.GetData<Color>(colorData2);
+
+            int top, bottom, left, right;
+
+            top = Math.Max(player.Top, item.Top);
+            bottom = Math.Min(player.Bottom, item.Bottom);
+            left = Math.Max(player.Left, item.Left);
+            right = Math.Min(player.Right, item.Right);
+
+            for(int y = top; y < bottom; y++)
+            {
+                for (int x = left; x < right; x++)
+                {
+                    Color A = colorData1[(y - player.Top) * (player.Width) + (x - player.Left)];
+                    Color B = colorData2[(y - item.Top) * (item.Width) + (x - item.Left)];
+
+                    if (A.A != 0 && B.A != 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public void LoadContent(ContentManager content)
         {
-            txt.LoadContent(content);
+            sptPlayer.LoadContent(content);
         }
 
         public void UnloadContent()
         {
-
+            
         }
 
         public void Update(GameTime gameTime, InputManager inputManager)
@@ -70,24 +93,36 @@ namespace Platformer
             if (inputManager.KeyDown(Keys.Left) || inputManager.KeyDown(Keys.A))
             {
                 position.X -= Values.playerStep;
+                sptPlayer.Update(gameTime);
+                movingLeft = true;
             }
-
+            else 
             if (inputManager.KeyDown(Keys.Right) || inputManager.KeyDown(Keys.D))
             {
                 position.X += Values.playerStep;
+                sptPlayer.Update(gameTime);
+                movingLeft = false;
             }
 
             if (inputManager.KeyDown(Keys.Space) || inputManager.KeyDown(Keys.Up))
             {
                 position.Y -= Values.playerStep;
+                sptPlayer.Update(gameTime);
             }
 
-            txt.Update(gameTime, position);
+            sptPlayer.Position = position;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            txt.Draw(spriteBatch);
+            if (movingLeft)
+            {
+                sptPlayer.Draw(spriteBatch, SpriteEffects.FlipHorizontally);
+            }
+            else
+            {
+                sptPlayer.Draw(spriteBatch, 0);
+            }
         }
     }
 }
