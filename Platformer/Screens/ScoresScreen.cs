@@ -1,21 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
+using Newtonsoft.Json;
+
 namespace Platformer
 {
     public class ScoresScreen : Screen
     {
+        private Scores scoresObj; 
+
         public ScoresScreen()
         {
-
+            scoresObj = JsonConvert.DeserializeObject<Scores>(File.ReadAllText(Values.scoresJsonPath));
+            //Add something
+            File.WriteAllText(Values.scoresJsonPath, JsonConvert.SerializeObject(scoresObj, Formatting.Indented));
         }
 
         public override void LoadContent(ContentManager Content, InputManager inputManager)

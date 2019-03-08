@@ -20,7 +20,7 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/CyrillicFont.spritefont
 
-#begin Sprites/Animated/Menu_animation.png
+#begin Sprites/Animated/Menu/Cat.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -30,9 +30,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Animated/Menu_animation.png
+/build:Sprites/Animated/Menu/Cat.png
 
-#begin Sprites/Animated/Player.png
+#begin Sprites/Animated/Player/Player.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -42,9 +42,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Animated/Player.png
+/build:Sprites/Animated/Player/Player.png
 
-#begin Sprites/ExitButton.png
+#begin Sprites/Not Animated/Map/Tile.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -54,9 +54,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/ExitButton.png
+/build:Sprites/Not Animated/Map/Tile.png
 
-#begin Sprites/Menu_Background.jpg
+#begin Sprites/Not Animated/Menu/Background.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -66,9 +66,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Menu_Background.jpg
+/build:Sprites/Not Animated/Menu/Background.jpg
 
-#begin Sprites/Menu_Button.png
+#begin Sprites/Not Animated/Menu/ExitButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -78,9 +78,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Menu_Button.png
+/build:Sprites/Not Animated/Menu/ExitButton.png
 
-#begin Sprites/Menu_Textbox.png
+#begin Sprites/Not Animated/Menu/PlayButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -90,9 +90,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/Menu_Textbox.png
+/build:Sprites/Not Animated/Menu/PlayButton.png
 
-#begin Sprites/PlayButton.png
+#begin Sprites/Not Animated/Menu/ScoresButton.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -102,9 +102,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/PlayButton.png
+/build:Sprites/Not Animated/Menu/ScoresButton.png
 
-#begin Sprites/ScoresButton.png
+#begin Sprites/Not Animated/Menu/Textbox.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -114,17 +114,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Sprites/ScoresButton.png
-
-#begin Sprites/Tile.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprites/Tile.png
+/build:Sprites/Not Animated/Menu/Textbox.png
 

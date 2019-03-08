@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -15,11 +11,11 @@ namespace Platformer
     {
         bool movingLeft;
 
-        string playerName = string.Empty;
-        public string PlayerName
+        string name = string.Empty;
+        public string Name
         {
-            get { return playerName; }
-            set { playerName = value; }
+            get { return Name; }
+            set { Name = value; }
         }
 
         Vector2 position = Values.playerStartPosition;
@@ -31,19 +27,9 @@ namespace Platformer
 
         AnimationManager sptPlayer;
 
-        private static Player instance;
-        public static Player Instance
+        public Player(string name)
         {
-            get
-            {
-                if (instance == null)
-                    instance = new Player();
-                return instance;
-            }
-        }
-
-        private Player()
-        {
+            this.name = name;
             sptPlayer = new AnimationManager(Values.sptPlayer, Values.playerFrameSize, Values.playerTiles);
             sptPlayer.Position = position;
         }

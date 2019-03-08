@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,16 +7,18 @@ namespace Platformer
     public class LevelScreen : Screen
     {
         Map map;
+        Player player;
 
-        public LevelScreen()
+        public LevelScreen(string playerName)
         {
             map = new Map();
+            player = new Player(playerName);
         }
 
         public override void LoadContent(ContentManager Content, InputManager inputManager)
         {
             base.LoadContent(Content, inputManager);
-            Player.Instance.LoadContent(Content);
+            player.LoadContent(Content);
 
             map.LoadContent(content);
         }
@@ -35,14 +31,14 @@ namespace Platformer
         public override void Update(GameTime gameTime, Game game)
         {
             inputManager.Update();
-            Player.Instance.Update(gameTime, inputManager);
+            player.Update(gameTime, inputManager);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.GraphicsDevice.Clear(Color.LightBlue);
             map.Draw(spriteBatch);
-            Player.Instance.Draw(spriteBatch);
+            player.Draw(spriteBatch);
         }
     }
 }

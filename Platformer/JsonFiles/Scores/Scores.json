@@ -1,0 +1,11 @@
+﻿/*
+  Example: {
+      "name": "string_Name",
+      "score": "uint_Score",
+      "time": "uint_Time"
+  }
+*/
+
+{
+  "items": []
+}

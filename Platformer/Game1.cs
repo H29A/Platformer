@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Platformer
 {
@@ -18,7 +17,7 @@ namespace Platformer
         protected override void Initialize()
         {
             ScreenManager.Instance.Initialize();
-            ScreenManager.Instance.Dimensions = new Vector2(1024, 800);
+            ScreenManager.Instance.Dimensions = Values.resolution;
 
             IsMouseVisible = true;
 
@@ -35,10 +34,7 @@ namespace Platformer
             ScreenManager.Instance.LoadContent(Content);
         }
 
-        protected override void UnloadContent()
-        {
-
-        }
+        protected override void UnloadContent() { }
 
         protected override void Update(GameTime gameTime)
         {

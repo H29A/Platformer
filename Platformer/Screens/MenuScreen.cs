@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -14,25 +10,24 @@ namespace Platformer
     public class MenuScreen : Screen
     {
         TextureManager txtBackground;
-        AnimationManager sptMenuCat;
-
         TextureManager playButton;
         TextureManager exitButton;
         TextureManager scoresButton;
-
         TextureManager nameTextbox;
+
+        AnimationManager sptMenuCat;
+
+        string playerName = string.Empty;
 
         public MenuScreen()
         {
             txtBackground = new TextureManager(Values.txtBackgroundPath, Vector2.Zero);
-            sptMenuCat = new AnimationManager(Values.sptMenuCat, Values.menuCatFrameSize, Values.menuCatTiles);
-
             playButton = new TextureManager(Values.txtPlayButton, Values.playButtonPosition);
             exitButton = new TextureManager(Values.txtExitButton, Values.exitButtonPosition);
             scoresButton = new TextureManager(Values.txtScoresButton, Values.scoresButtonPosition);
-
             nameTextbox = new TextureManager(Values.txtTextbox, Values.nameTextboxPosition);
 
+            sptMenuCat = new AnimationManager(Values.sptMenuCat, Values.menuCatFrameSize, Values.menuCatTiles);
             sptMenuCat.Position = Values.menuCatPosition;
         }
 
@@ -81,13 +76,13 @@ namespace Platformer
             {
                 if (inputManager.KeyPressed(key))
                 {
-                    if (key == Keys.Back && Player.Instance.PlayerName.Length > 0)
+                    if (key == Keys.Back && playerName.Length > 0)
                     {
-                        Player.Instance.PlayerName = Player.Instance.PlayerName.Remove(Player.Instance.PlayerName.Length - 1, 1);
+                        playerName = playerName.Remove(playerName.Length - 1, 1);
                         Values.descriptorPosition.X += 7.5f;
                     }
                     else 
-                    if (Player.Instance.PlayerName.Length < 8 &&
+                    if (playerName.Length < 8 &&
                              key.GetHashCode() >= 65 &&
                              key.GetHashCode() <= 90 ||
                              key == Keys.OemOpenBrackets ||
@@ -133,7 +128,7 @@ namespace Platformer
                             case "OemPeriod": toStringKeys = "Ю"; break;
                             default: toStringKeys = Convert.ToString((Keys)key); break;
                         }
-                        Player.Instance.PlayerName += toStringKeys;
+                        playerName += toStringKeys;
                         Values.descriptorPosition.X -= 7.5f;
                     }
                 }
@@ -147,9 +142,9 @@ namespace Platformer
 
             sptMenuCat.Update(gameTime);
 
-            if (IsClickedOn(playButton) && (Player.Instance.PlayerName != string.Empty))
+            if (IsClickedOn(playButton) && (playerName != string.Empty))
             {
-                ScreenManager.Instance.AddScreen(new LevelScreen(), inputManager);
+                ScreenManager.Instance.AddScreen(new LevelScreen(playerName), inputManager);
             } else 
             if (IsClickedOn(scoresButton))
             {
@@ -173,7 +168,7 @@ namespace Platformer
             exitButton.Draw(spriteBatch);
             scoresButton.Draw(spriteBatch);
 
-            spriteBatch.DrawString(font, Player.Instance.PlayerName, Values.descriptorPosition, new Color(228, 209, 209));
+            spriteBatch.DrawString(font, playerName, Values.descriptorPosition, new Color(228, 209, 209));
         }
     }
 }
