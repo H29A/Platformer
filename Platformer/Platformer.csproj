@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Managers\TextureManager.cs" />
+    <Compile Include="Managers\TimeManager.cs" />
     <Compile Include="Map.cs" />
+    <Compile Include="Platform.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="JsonFiles\Scores\Scores.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

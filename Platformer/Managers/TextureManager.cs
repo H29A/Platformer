@@ -10,7 +10,6 @@ namespace Platformer
         public Texture2D Texture
         {
             get { return texture; }
-            private set { }
         }
 
         private string path;
@@ -19,7 +18,7 @@ namespace Platformer
         public Vector2 Position
         {
             get { return position; }
-            private set { }
+            set { position = value; }
         }
 
         public TextureManager(string path, Vector2 position)

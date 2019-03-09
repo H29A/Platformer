@@ -6,8 +6,10 @@ namespace Platformer
     {
         #region Main settings
             static public Vector2 resolution = new Vector2(1024, 800);
-            public const float gravitation = 5;
-            public const float playerStep = 3;
+            public const double newPlatformTiming = 350; //milliseconds
+            public const float gravitation = 0.5f;
+            public const float playerJump = 10f;
+            public const float platformsSpeed = 5f;
         #endregion
 
         #region Sprites settings
@@ -22,9 +24,14 @@ namespace Platformer
                     static public readonly Vector2 playerFrameSize = new Vector2(80, 56);
                     static public readonly Point playerTiles = new Point(3, 2);
                 #endregion
+                #region Sky
+                    static public readonly Vector2 skyFrameSize = new Vector2(450, 810);
+                    static public readonly Point skyTiles = new Point(5, 4);
+                #endregion
                 #region Paths
                     public const string sptMenuCat = "Sprites/Animated/Menu/Cat";
                     public const string sptPlayer = "Sprites/Animated/Player/Player";
+                    public const string sptSky = "Sprites/Animated/Map/Sky";  
                 #endregion
             #endregion  
             #region Not animated items
@@ -36,7 +43,7 @@ namespace Platformer
                         static public readonly Vector2 nameTextboxPosition = new Vector2(365, 50);
                     #endregion
                     #region Paths
-                        public const string txtBackgroundPath = "Sprites/Not Animated/Menu/Background";
+                        public const string txtBackground = "Sprites/Not Animated/Menu/Background";
                         public const string txtPlayButton = "Sprites/Not Animated/Menu/PlayButton";
                         public const string txtExitButton = "Sprites/Not Animated/Menu/ExitButton";
                         public const string txtScoresButton = "Sprites/Not Animated/Menu/ScoresButton";
@@ -44,13 +51,15 @@ namespace Platformer
         #endregion
                 #endregion
                 #region Map items
+                    static public readonly string txtSky = "Sprites/Not Animated/Map/Background";
                     static public readonly string defaultTile = "Sprites/Not Animated/Map/Tile"; //temporally
+                    static public readonly string txtPlatform = "Sprites/Not Animated/Map/Platform";
                 #endregion
-            #endregion
+        #endregion
         #endregion
 
         #region Other settings
-            static public Vector2 descriptorPosition = new Vector2(518, 145);
+        static public Vector2 descriptorPosition = new Vector2(518, 145);
             public const int mapTileSize = 32;
         #endregion
 

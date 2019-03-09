@@ -21,7 +21,7 @@ namespace Platformer
 
         public MenuScreen()
         {
-            txtBackground = new TextureManager(Values.txtBackgroundPath, Vector2.Zero);
+            txtBackground = new TextureManager(Values.txtBackground, Vector2.Zero);
             playButton = new TextureManager(Values.txtPlayButton, Values.playButtonPosition);
             exitButton = new TextureManager(Values.txtExitButton, Values.exitButtonPosition);
             scoresButton = new TextureManager(Values.txtScoresButton, Values.scoresButtonPosition);

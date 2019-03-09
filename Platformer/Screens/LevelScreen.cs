@@ -18,9 +18,9 @@ namespace Platformer
         public override void LoadContent(ContentManager Content, InputManager inputManager)
         {
             base.LoadContent(Content, inputManager);
-            player.LoadContent(Content);
 
             map.LoadContent(content);
+            player.LoadContent(Content);
         }
 
         public override void UnloadContent()
@@ -31,6 +31,7 @@ namespace Platformer
         public override void Update(GameTime gameTime, Game game)
         {
             inputManager.Update();
+            map.Update(gameTime);
             player.Update(gameTime, inputManager);
         }
 

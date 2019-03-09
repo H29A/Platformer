@@ -44,6 +44,12 @@ namespace Platformer
             this.tilesMatrix = tilesMatrix;
         }
 
+        public AnimationManager(Vector2 frameSize, Point tilesMatrix)
+        {
+            this.frameSize = frameSize;
+            this.tilesMatrix = tilesMatrix;
+        }
+
         public void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>(path);
@@ -70,7 +76,29 @@ namespace Platformer
         {
             spriteBatch.Draw
                 (
-                    this.texture,
+                    texture,
+                    new Vector2(position.X, position.Y),
+                    new Rectangle
+                        (
+                            Convert.ToInt32(currentFrame.X * frameSize.X),
+                            Convert.ToInt32(currentFrame.Y * frameSize.Y),
+                            Convert.ToInt32(frameSize.X),
+                            Convert.ToInt32(frameSize.Y)
+                        ),
+                    Color.White,
+                    0,
+                    Vector2.Zero,
+                    1,
+                    direction,
+                    0
+               );
+        }
+
+        public void Draw(SpriteBatch spriteBatch, Texture2D texture, SpriteEffects direction)
+        {
+            spriteBatch.Draw
+                (
+                    texture,
                     new Vector2(position.X, position.Y),
                     new Rectangle
                         (
