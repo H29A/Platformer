@@ -1,6 +1,4 @@
-﻿using System;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -39,10 +37,7 @@ namespace Platformer
             sptPlayer.LoadContent(content);
         }
 
-        public void UnloadContent()
-        {
-            
-        }
+        public void UnloadContent() { }
 
         public void Update(GameTime gameTime, InputManager inputManager)
         {
@@ -51,9 +46,9 @@ namespace Platformer
             foreach (Platform platform in Map.platforms)
             {
                 Rectangle item = new Rectangle((int)platform.Position.X, (int)platform.Position.Y, Platform.texture.Width, Platform.texture.Height);
-                if (player.Intersects(item))
+                if (player.isOnTopOf(item))
                 {
-                    position.Y = item.Y - Values.playerFrameSize.Y + 4;
+                    position.Y = item.Y - Values.playerFrameSize.Y;
                 }
                 else
                 {
