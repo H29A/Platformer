@@ -15,7 +15,8 @@ namespace Platformer
         TextureManager scoresButton;
         TextureManager nameTextbox;
 
-        AnimationManager sptMenuCat;
+        Sprite sptMenuCat;
+        Texture2D txtMenuCat;
 
         string playerName = string.Empty;
 
@@ -26,9 +27,6 @@ namespace Platformer
             exitButton = new TextureManager(Values.txtExitButton, Values.exitButtonPosition);
             scoresButton = new TextureManager(Values.txtScoresButton, Values.scoresButtonPosition);
             nameTextbox = new TextureManager(Values.txtTextbox, Values.nameTextboxPosition);
-
-            sptMenuCat = new AnimationManager(Values.sptMenuCat, Values.menuCatFrameSize, Values.menuCatTiles);
-            sptMenuCat.Position = Values.menuCatPosition;
         }
 
         public override void LoadContent(ContentManager Content, InputManager inputManager)
@@ -36,7 +34,10 @@ namespace Platformer
             base.LoadContent(Content, inputManager);
 
             txtBackground.LoadContent(Content);
-            sptMenuCat.LoadContent(Content);
+
+            txtMenuCat = content.Load<Texture2D>(Values.sptMenuCat);
+            sptMenuCat = new Sprite(txtMenuCat, Values.menuCatFrameSize, Values.menuCatTiles, Values.menuCatTimeSpan);
+            sptMenuCat.SetPosition(Values.menuCatPosition);
 
             playButton.LoadContent(Content);
             exitButton.LoadContent(Content);
@@ -138,9 +139,9 @@ namespace Platformer
         public override void Update(GameTime gameTime, Game game)
         {
             inputManager.Update();
-            IsLetterEntered(inputManager.KeyState.GetPressedKeys());
-
             sptMenuCat.Update(gameTime);
+
+            IsLetterEntered(inputManager.KeyState.GetPressedKeys());
 
             if (IsClickedOn(playButton) && (playerName != string.Empty))
             {
@@ -162,7 +163,7 @@ namespace Platformer
 
             txtBackground.Draw(spriteBatch);
             nameTextbox.Draw(spriteBatch);
-            sptMenuCat.Draw(spriteBatch, 0);
+            sptMenuCat.DrawAnimated(spriteBatch);
 
             playButton.Draw(spriteBatch);
             exitButton.Draw(spriteBatch);

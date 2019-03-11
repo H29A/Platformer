@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,27 +13,27 @@ namespace Platformer
 
         static public List<Platform> platforms = new List<Platform>();
 
-        List<AnimationManager> sptBackground = new List<AnimationManager>();
+        List<Sprite> sptBackground = new List<Sprite>();
 
-        Texture2D sptSky;
+        Texture2D txtSky;
 
         public Map()
         {
-            timeManager = new TimeManager(Values.newPlatformTiming);
+            timeManager = new TimeManager(Values.spawnPlatformTimeSpan);
         }
 
         public void LoadContent(ContentManager content)
         {
-            sptSky = content.Load<Texture2D>(Values.sptSky);
+            txtSky = content.Load<Texture2D>(Values.sptSky);
 
-            int offset = 0;
+            float offset = 0;
             for (int i = 0; i < 3; i++)
             {
-                sptBackground.Add(new AnimationManager(Values.skyFrameSize, Values.skyTiles));
-                sptBackground[i].Position = new Vector2(offset, sptBackground[i].Position.Y);
-                offset += (int)Values.skyFrameSize.X;
+                sptBackground.Add(new Sprite(txtSky, Values.skyFrameSize, Values.skyTiles, Values.skyTimeSpan));
+                sptBackground[i].SetPosition(offset, sptBackground[i].Position.Y);
+                offset += (float)Values.skyFrameSize.X;
             }
-               
+
             Platform.texture = content.Load<Texture2D>(Values.txtPlatform);
         }
 
@@ -40,15 +41,13 @@ namespace Platformer
 
         private void AddSkySprite()
         {
-            sptBackground.Add(new AnimationManager(Values.skyFrameSize, Values.skyTiles));
-            sptBackground[sptBackground.Count - 1].Position = new Vector2
-                (
-                    sptBackground[sptBackground.Count - 2].Position.X + Values.skyFrameSize.X,
-                    0
-                );
+            sptBackground.Add(new Sprite(txtSky, Values.skyFrameSize, Values.skyTiles, Values.skyTimeSpan));
+            sptBackground[sptBackground.Count - 1].SetPosition(
+                sptBackground[sptBackground.Count - 2].Position.X + Values.skyFrameSize.X,
+                0);
         }
 
-        private bool IsSpriteBehindTheScreen(AnimationManager sprite)
+        private bool IsSpriteBehindTheScreen(Sprite sprite)
         {
             if (sprite.Position.X + Values.skyFrameSize.X < 0)
             {
@@ -58,7 +57,7 @@ namespace Platformer
             return false;
         }
 
-        private bool IsSpriteBeforeTheScreen(AnimationManager sprite)
+        private bool IsSpriteBeforeTheScreen(Sprite sprite)
         {
             if (sprite == sptBackground[sptBackground.Count - 1] &&
                 sptBackground[sptBackground.Count - 1].Position.X + Values.skyFrameSize.X < Values.resolution.X)
@@ -69,30 +68,30 @@ namespace Platformer
             return false;
         }
 
-        private void MoveSprite(AnimationManager sprite)
+        private void MoveSprite(Sprite sprite)
         {
-            sprite.Position = new Vector2(sprite.Position.X - Values.platformsSpeed, sprite.Position.Y);
+            sprite.SetPosition(sprite.Position.X - Values.platformsSpeed, sprite.Position.Y);
         }
 
         public void Update(GameTime gameTime)
         {
             timeManager.Update(gameTime);
 
-            foreach (AnimationManager currentSprite in sptBackground.ToArray())
+            foreach (Sprite sprite in sptBackground.ToArray())
             {
-                MoveSprite(currentSprite);
+                MoveSprite(sprite);
 
-                if (IsSpriteBehindTheScreen(currentSprite))
+                if (IsSpriteBehindTheScreen(sprite))
                 {
-                    sptBackground.Remove(currentSprite);
+                    sptBackground.Remove(sprite);
                 }
 
-                if (IsSpriteBeforeTheScreen(currentSprite))
+                if (IsSpriteBeforeTheScreen(sprite))
                 {
                     AddSkySprite();
                 }
 
-                currentSprite.Update(gameTime);
+                sprite.Update(gameTime);
             }
 
             if (platforms.Count == 0)
@@ -125,9 +124,9 @@ namespace Platformer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            foreach (AnimationManager sky in sptBackground.ToArray())
+            foreach (Sprite sky in sptBackground.ToArray())
             {
-                sky.Draw(spriteBatch, sptSky, 0);
+                sky.DrawAnimated(spriteBatch);
             }
 
             if (platforms.Count > 0)

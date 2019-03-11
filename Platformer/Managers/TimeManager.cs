@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace Platformer
 {
@@ -7,16 +8,16 @@ namespace Platformer
         int time;
         int startTime;
         int elapsedTime;
-        double duration;
+        TimeSpan duration;
 
         int ElapsedTime
         {
             get { return elapsedTime; }
         }
 
-        public TimeManager(double duration)
+        public TimeManager(TimeSpan timeSpan)
         {
-            this.duration = duration;
+            this.duration = timeSpan;
         }
 
         public void Update(GameTime gameTime)
@@ -57,7 +58,7 @@ namespace Platformer
         
         public bool IsTimeOver ()
         {
-            if (IsTimerStarted() && (elapsedTime >= duration))
+            if (IsTimerStarted() && (elapsedTime >= duration.Milliseconds))
             {
                 return true;
             }

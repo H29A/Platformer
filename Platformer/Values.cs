@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 
 namespace Platformer
 {
@@ -6,27 +7,31 @@ namespace Platformer
     {
         #region Main settings
             static public Vector2 resolution = new Vector2(1024, 800);
-            public const double newPlatformTiming = 350; //milliseconds
+            static public TimeSpan jumpTimeSpan = new TimeSpan(0, 0, 0, 0, 350);
+            static public TimeSpan spawnPlatformTimeSpan = new TimeSpan(0, 0, 0, 0, 350); //millisecondsZ
             public const float gravitation = 0.5f;
-            public const float playerJump = 10f;
-            public const float platformsSpeed = 5f;
+            public const float playerJump = 8f;
+            public const float platformsSpeed = 8f;
         #endregion
 
         #region Sprites settings
             #region Animated items
                 #region Menu cat sprite
                     static public readonly Vector2 menuCatPosition = new Vector2(260, 210);
-                    static public readonly Vector2 menuCatFrameSize = new Vector2(500, 456);
+                    static public readonly Point menuCatFrameSize = new Point(500, 456);
                     static public readonly Point menuCatTiles = new Point(6, 7);
+                    static public readonly TimeSpan menuCatTimeSpan = new TimeSpan(0, 0, 0, 0, 65); //milliseconds
                 #endregion
                 #region Player sprite
-                    static public readonly Vector2 playerStartPosition = new Vector2(300, 100);
-                    static public readonly Vector2 playerFrameSize = new Vector2(80, 56);
+                    static public readonly Vector2 playerStartPosition = new Vector2(300, 100); 
+                    static public readonly Point playerFrameSize = new Point(80, 56);
                     static public readonly Point playerTiles = new Point(3, 2);
+                    static public readonly TimeSpan playerTimeSpan = new TimeSpan(0, 0, 0, 0, 50); //milliseconds
                 #endregion
                 #region Sky
-                    static public readonly Vector2 skyFrameSize = new Vector2(450, 810);
+                    static public readonly Point skyFrameSize = new Point(450, 810);
                     static public readonly Point skyTiles = new Point(5, 4);
+                    static public readonly TimeSpan skyTimeSpan = new TimeSpan(0, 0, 0, 0, 50); //milliseconds
                 #endregion
                 #region Paths
                     public const string sptMenuCat = "Sprites/Animated/Menu/Cat";
@@ -48,7 +53,7 @@ namespace Platformer
                         public const string txtExitButton = "Sprites/Not Animated/Menu/ExitButton";
                         public const string txtScoresButton = "Sprites/Not Animated/Menu/ScoresButton";
                         public const string txtTextbox = "Sprites/Not Animated/Menu/Textbox";
-        #endregion
+                    #endregion
                 #endregion
                 #region Map items
                     static public readonly string txtSky = "Sprites/Not Animated/Map/Background";
@@ -59,7 +64,7 @@ namespace Platformer
         #endregion
 
         #region Other settings
-        static public Vector2 descriptorPosition = new Vector2(518, 145);
+            static public Vector2 descriptorPosition = new Vector2(518, 145);
             public const int mapTileSize = 32;
         #endregion
 

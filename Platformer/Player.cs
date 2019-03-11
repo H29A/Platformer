@@ -7,6 +7,8 @@ namespace Platformer
 {
     public class Player
     {
+        TimeManager timeManager;
+
         string name = string.Empty;
         public string Name
         {
@@ -21,34 +23,47 @@ namespace Platformer
             private set { }
         }
 
-        AnimationManager sptPlayer;
+        Sprite sptPlayer;
+        Texture2D txtPlayer;
+
+        bool isJumping;
 
         public Player(string name)
         {
-            this.name = name;
-            sptPlayer = new AnimationManager(Values.sptPlayer, Values.playerFrameSize, Values.playerTiles);
-            sptPlayer.Position = position;
-        }
+            timeManager = new TimeManager(Values.jumpTimeSpan);
 
-        Rectangle player;
+            this.name = name;
+            isJumping = false;
+        }
 
         public void LoadContent(ContentManager content)
         {
-            sptPlayer.LoadContent(content);
+            txtPlayer = content.Load<Texture2D>(Values.sptPlayer);
+            sptPlayer = new Sprite(txtPlayer, Values.playerFrameSize, Values.playerTiles, Values.playerTimeSpan);
+            sptPlayer.SetPosition(position);
         }
 
         public void UnloadContent() { }
 
         public void Update(GameTime gameTime, InputManager inputManager)
         {
-            player = new Rectangle((int)position.X, (int)position.Y, (int)Values.playerFrameSize.X, (int)Values.playerFrameSize.Y);
+            timeManager.Update(gameTime);
+            sptPlayer.SetPosition(position);
+            sptPlayer.SetRect((int)position.X, (int)position.Y, (int)Values.playerFrameSize.X, (int)Values.playerFrameSize.Y);
+            sptPlayer.Update(gameTime);
 
             foreach (Platform platform in Map.platforms)
             {
                 Rectangle item = new Rectangle((int)platform.Position.X, (int)platform.Position.Y, Platform.texture.Width, Platform.texture.Height);
-                if (player.isOnTopOf(item))
+                if (sptPlayer.Rect.isOnTopOf(item))
                 {
                     position.Y = item.Y - Values.playerFrameSize.Y;
+
+                    if ((inputManager.KeyDown(Keys.Space) || inputManager.KeyDown(Keys.Up)) && !isJumping)
+                    {
+                        isJumping = true;
+                        timeManager.StartTimer();
+                    }
                 }
                 else
                 {
@@ -56,18 +71,22 @@ namespace Platformer
                 }
             }
 
-            if (inputManager.KeyDown(Keys.Space) || inputManager.KeyDown(Keys.Up))
+            if (timeManager.IsTimeOver() && isJumping)
+            {
+                timeManager.CleanTimer();
+                isJumping = false;
+            }
+
+            if (isJumping)
             {
                 position.Y -= Values.playerJump;
             }
-            
-            sptPlayer.Position = position;
-            sptPlayer.Update(gameTime);
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            sptPlayer.Draw(spriteBatch, 0);
+            sptPlayer.DrawAnimated(spriteBatch);
         }
     }
 }
