@@ -8,10 +8,13 @@ namespace Platformer
         #region Main settings
             static public Vector2 resolution = new Vector2(1024, 800);
             static public TimeSpan jumpTimeSpan = new TimeSpan(0, 0, 0, 0, 350);
-            static public TimeSpan spawnPlatformTimeSpan = new TimeSpan(0, 0, 0, 0, 350); //millisecondsZ
-            public const float gravitation = 0.5f;
-            public const float playerJump = 8f;
+            static public TimeSpan spawnPlatformTimeSpan = new TimeSpan(0, 0, 0, 0, 200); //milliseconds
+            public const float playerVelocity = 100f;
+            public const float gravitation = 0.7f;
+            public const float playerJump = 15f;
             public const float platformsSpeed = 8f;
+            public const float LowerPlatformSpawnValue = 120;
+            public const float UpperPlatformSpawnValue = 120;
         #endregion
 
         #region Sprites settings

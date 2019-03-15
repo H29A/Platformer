@@ -12,15 +12,23 @@ namespace Platformer
         string name = string.Empty;
         public string Name
         {
-            get { return Name; }
-            set { Name = value; }
+            get
+            {
+                return Name;
+            }
+            set
+            {
+                Name = value;
+            }
         }
 
         Vector2 position = Values.playerStartPosition;
         public Vector2 Position
         {
-            get { return position; }
-            private set { }
+            get
+            {
+                return position;
+            }
         }
 
         Sprite sptPlayer;
@@ -43,7 +51,10 @@ namespace Platformer
             sptPlayer.SetPosition(position);
         }
 
-        public void UnloadContent() { }
+        public void UnloadContent()
+        {
+
+        }
 
         public void Update(GameTime gameTime, InputManager inputManager)
         {

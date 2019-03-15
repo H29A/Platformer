@@ -7,12 +7,15 @@ namespace Platformer
     {
         int time;
         int startTime;
-        int elapsedTime;
         TimeSpan duration;
 
+        int elapsedTime;
         int ElapsedTime
         {
-            get { return elapsedTime; }
+            get
+            {
+                return elapsedTime;
+            }
         }
 
         public TimeManager(TimeSpan timeSpan)

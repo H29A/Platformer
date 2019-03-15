@@ -41,7 +41,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Managers\TextureManager.cs" />
     <Compile Include="Managers\TimeManager.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Platform.cs" />

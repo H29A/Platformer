@@ -8,28 +8,52 @@ namespace Platformer
 
         public KeyboardState PrevKeyState
         {
-            get { return prevKeyState; }
-            set { prevKeyState = value; }
+            get
+            {
+                return prevKeyState;
+            }
+            set
+            {
+                prevKeyState = value;
+            }
         }
 
         public KeyboardState KeyState
         {
-            get { return keyState; }
-            set { keyState = value; }
+            get
+            {
+                return keyState;
+            }
+            set
+            {
+                keyState = value;
+            }
         }
 
         MouseState prevMouseState, mouseState;
 
         public MouseState PrevMouseState
         {
-            get { return prevMouseState; }
-            set { prevMouseState = value; }
+            get
+            {
+                return prevMouseState;
+            }
+            set
+            {
+                prevMouseState = value;
+            }
         }
 
         public MouseState MouseState
         {
-            get { return mouseState; }
-            set { mouseState = value; }
+            get
+            {
+                return mouseState;
+            }
+            set
+            {
+                mouseState = value;
+            }
         }
 
         public void Update()

@@ -41,8 +41,8 @@ namespace Platformer
             {
                 foreach (Platform platform in Map.platforms)
                 {
-                    if (platform.Position.Y - 100 < value && 
-                        platform.Position.Y + 100 > value && 
+                    if (platform.Position.Y - Values.UpperPlatformSpawnValue < value && 
+                        platform.Position.Y + Values.LowerPlatformSpawnValue > value && 
                         platform.position.X > Values.resolution.X - 1.5 * texture.Width)
                     {
                         return false;

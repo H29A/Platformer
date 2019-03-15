@@ -18,7 +18,10 @@ namespace Platformer
 
         private static ScreenManager instance;
 
-        private ScreenManager() { }
+        private ScreenManager()
+        {
+
+        }
 
         public static Stack<Screen> screenStack = new Stack<Screen>();
 
@@ -36,8 +39,14 @@ namespace Platformer
 
         public Vector2 Dimensions
         {
-            get { return dimensions; }
-            set { dimensions = value; }
+            get
+            {
+                return dimensions;
+            }
+            set
+            {
+                dimensions = value;
+            }
         }
 
         public void AddScreen(Screen screen, InputManager inputManager)

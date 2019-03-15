@@ -9,11 +9,20 @@ namespace Platformer
 {
     public class MenuScreen : Screen
     {
-        TextureManager txtBackground;
-        TextureManager playButton;
-        TextureManager exitButton;
-        TextureManager scoresButton;
-        TextureManager nameTextbox;
+        Sprite background;
+        Texture2D txtBackground;
+
+        Sprite playButton;
+        Texture2D txtPlayButton;
+
+        Sprite exitButton;
+        Texture2D txtExitButton;
+
+        Sprite scoresButton;
+        Texture2D txtScoresButton;
+
+        Sprite nameTextbox;
+        Texture2D txtTextBox;
 
         Sprite sptMenuCat;
         Texture2D txtMenuCat;
@@ -22,28 +31,36 @@ namespace Platformer
 
         public MenuScreen()
         {
-            txtBackground = new TextureManager(Values.txtBackground, Vector2.Zero);
-            playButton = new TextureManager(Values.txtPlayButton, Values.playButtonPosition);
-            exitButton = new TextureManager(Values.txtExitButton, Values.exitButtonPosition);
-            scoresButton = new TextureManager(Values.txtScoresButton, Values.scoresButtonPosition);
-            nameTextbox = new TextureManager(Values.txtTextbox, Values.nameTextboxPosition);
+
         }
 
         public override void LoadContent(ContentManager Content, InputManager inputManager)
         {
             base.LoadContent(Content, inputManager);
 
-            txtBackground.LoadContent(Content);
+            txtBackground = content.Load<Texture2D>(Values.txtBackground);
+            background = new Sprite(txtBackground);
+            background.SetPosition(Vector2.Zero);
+
+            txtPlayButton = content.Load<Texture2D>(Values.txtPlayButton);
+            playButton = new Sprite(txtPlayButton);
+            playButton.SetPosition(Values.playButtonPosition);
+
+            txtExitButton = content.Load<Texture2D>(Values.txtExitButton);
+            exitButton = new Sprite(txtExitButton);
+            exitButton.SetPosition(Values.exitButtonPosition);
+
+            txtScoresButton = content.Load<Texture2D>(Values.txtScoresButton);
+            scoresButton = new Sprite(txtScoresButton);
+            scoresButton.SetPosition(Values.scoresButtonPosition);
+
+            txtTextBox = content.Load<Texture2D>(Values.txtTextbox);
+            nameTextbox = new Sprite(txtTextBox);
+            nameTextbox.SetPosition(Values.nameTextboxPosition);
 
             txtMenuCat = content.Load<Texture2D>(Values.sptMenuCat);
             sptMenuCat = new Sprite(txtMenuCat, Values.menuCatFrameSize, Values.menuCatTiles, Values.menuCatTimeSpan);
             sptMenuCat.SetPosition(Values.menuCatPosition);
-
-            playButton.LoadContent(Content);
-            exitButton.LoadContent(Content);
-            scoresButton.LoadContent(Content);
-
-            nameTextbox.LoadContent(Content);
         }
 
         public override void UnloadContent()
@@ -52,7 +69,7 @@ namespace Platformer
             content.Unload();
         }
 
-        private bool IsClickedOn(TextureManager item)
+        private bool IsClickedOn(Sprite item)
         {
             Vector2 position = inputManager.MouseState.Position.ToVector2();
 
@@ -160,15 +177,12 @@ namespace Platformer
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.GraphicsDevice.Clear(Color.Black);
-
-            txtBackground.Draw(spriteBatch);
-            nameTextbox.Draw(spriteBatch);
+            background.DrawStatic(spriteBatch);
+            nameTextbox.DrawStatic(spriteBatch);
             sptMenuCat.DrawAnimated(spriteBatch);
-
-            playButton.Draw(spriteBatch);
-            exitButton.Draw(spriteBatch);
-            scoresButton.Draw(spriteBatch);
-
+            playButton.DrawStatic(spriteBatch);
+            exitButton.DrawStatic(spriteBatch);
+            scoresButton.DrawStatic(spriteBatch);
             spriteBatch.DrawString(font, playerName, Values.descriptorPosition, new Color(228, 209, 209));
         }
     }
