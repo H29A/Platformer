@@ -6,14 +6,44 @@ namespace Platformer
     static public class Values
     {
         #region Main settings
+            /// Game window resolution option
+            /// Параметр разрешения окна игры
             static public Vector2 resolution = new Vector2(1024, 800);
-            static public TimeSpan jumpTimeSpan = new TimeSpan(0, 0, 0, 0, 350);
-            static public TimeSpan spawnPlatformTimeSpan = new TimeSpan(0, 0, 0, 0, 200); //milliseconds
-            public const float playerVelocity = 100f;
-            public const float gravitation = 0.7f;
-            public const float playerJump = 15f;
-            public const float platformsSpeed = 8f;
+            
+            /// Time to lift the character up when jumping
+            /// Время подъема персонажа вверх при прыжке
+            static public TimeSpan jumpTimeSpan = new TimeSpan(0, 0, 0, 0, 350); //milliseconds
+
+            /// Character acceleration time when falling
+            /// Время ускорения персонажа при падении
+            static public TimeSpan fallTimeSpan = new TimeSpan(0, 0, 0, 0, 200); //milliseconds    
+
+            /// Delay in creating a new platform
+            /// Задержка создания новой платформы
+            static public TimeSpan spawnPlatformTimeSpan = new TimeSpan(0, 0, 0, 0, 150); //milliseconds
+            
+            /// Acceleration of the character at the beginning of the jump
+            /// Ускорение персонажа при начале прыжка
+            public const float playerJumpAcceleration = 5f;
+
+            /// character movement speed
+            /// Скорость движения персонажа
+            public const float playerVelocity = 120f;
+
+            /// Character gravity
+            /// Сила тяжести персонажа
+            public const float playerGravity = 0.03f;
+            
+            /// Platform movement speed
+            /// Скорость движения платформ
+            public const float platformsSpeed = 10f;
+ 
+            /// Minimum distance (in pixels) required to turn a new platform relative to the bottom of all platforms
+            /// Минимальное расстояние (в пикселях), необходимое для повления новой платформы относительно низа всех платформ
             public const float LowerPlatformSpawnValue = 120;
+            
+            /// The minimum distance (in pixels) required to turn a new platform relative to the top of all platforms
+            /// Минимальное расстояние (в пикселях), необходимое для повления новой платформы относительно верха всех платформ
             public const float UpperPlatformSpawnValue = 120;
         #endregion
 

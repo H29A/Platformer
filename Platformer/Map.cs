@@ -9,7 +9,7 @@ namespace Platformer
 {
     public class Map
     {
-        TimeManager timeManager;
+        Timer timer;
 
         static public List<Platform> platforms = new List<Platform>();
 
@@ -19,7 +19,7 @@ namespace Platformer
 
         public Map()
         {
-            timeManager = new TimeManager(Values.spawnPlatformTimeSpan);
+            timer = new Timer(Values.spawnPlatformTimeSpan);
         }
 
         public void LoadContent(ContentManager content)
@@ -75,7 +75,7 @@ namespace Platformer
 
         public void Update(GameTime gameTime)
         {
-            timeManager.Update(gameTime);
+            timer.Update(gameTime);
 
             foreach (Sprite sprite in sptBackground.ToArray())
             {
@@ -96,14 +96,14 @@ namespace Platformer
 
             if (platforms.Count == 0)
             {
-                timeManager.StartTimer();
+                timer.StartTimer();
             }
 
-            if (timeManager.IsTimeOver())
+            if (timer.IsTimeOver())
             {
                 platforms.Add(new Platform());
-                timeManager.CleanTimer();
-                timeManager.StartTimer();
+                timer.CleanTimer();
+                timer.StartTimer();
             }
 
             if (platforms.Count > 0)

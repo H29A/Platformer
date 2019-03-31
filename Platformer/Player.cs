@@ -7,7 +7,8 @@ namespace Platformer
 {
     public class Player
     {
-        TimeManager timeManager;
+        Timer jumpTimer;
+        Timer fallTimer;
 
         string name = string.Empty;
         public string Name
@@ -35,10 +36,12 @@ namespace Platformer
         Texture2D txtPlayer;
 
         bool isJumping;
+        bool isFalling;
 
         public Player(string name)
         {
-            timeManager = new TimeManager(Values.jumpTimeSpan);
+            jumpTimer = new Timer(Values.jumpTimeSpan);
+            fallTimer = new Timer(Values.fallTimeSpan);
 
             this.name = name;
             isJumping = false;
@@ -58,7 +61,9 @@ namespace Platformer
 
         public void Update(GameTime gameTime, InputManager inputManager)
         {
-            timeManager.Update(gameTime);
+            jumpTimer.Update(gameTime);
+            fallTimer.Update(gameTime);
+
             sptPlayer.SetPosition(position);
             sptPlayer.SetRect((int)position.X, (int)position.Y, (int)Values.playerFrameSize.X, (int)Values.playerFrameSize.Y);
             sptPlayer.Update(gameTime);
@@ -68,31 +73,43 @@ namespace Platformer
                 Rectangle item = new Rectangle((int)platform.Position.X, (int)platform.Position.Y, Platform.texture.Width, Platform.texture.Height);
                 if (sptPlayer.Rect.isOnTopOf(item))
                 {
+                    fallTimer.CleanTimer();
                     position.Y = item.Y - Values.playerFrameSize.Y;
 
                     if ((inputManager.KeyDown(Keys.Space) || inputManager.KeyDown(Keys.Up)) && !isJumping)
                     {
                         isJumping = true;
-                        timeManager.StartTimer();
+                        jumpTimer.StartTimer();
                     }
                 }
-                else
+                else 
                 {
-                    position.Y += Values.gravitation;
+                    isFalling = true;
                 }
             }
 
-            if (timeManager.IsTimeOver() && isJumping)
+            if (jumpTimer.IsTimeOver() && isJumping)
             {
-                timeManager.CleanTimer();
+                jumpTimer.CleanTimer();
                 isJumping = false;
+
+                fallTimer.StartTimer();
             }
 
             if (isJumping)
             {
-                position.Y -= Values.playerJump;
+                position.Y -= jumpTimer.ResidualTime * Values.playerGravity + Values.playerJumpAcceleration;
             }
 
+            if(isFalling)
+            {
+                if (!fallTimer.IsTimerStarted())
+                {
+                    fallTimer.StartTimer();
+                }
+
+                position.Y += fallTimer.ElapsedTime * Values.playerGravity;
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

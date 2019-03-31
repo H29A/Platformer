@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="RectangleHalper.cs" />
     <Compile Include="Sprite.cs" />
+    <Compile Include="Timer.cs" />
     <Compile Include="Values.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Managers\InputManager.cs" />
