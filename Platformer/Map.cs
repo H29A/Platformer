@@ -34,7 +34,7 @@ namespace Platformer
                 offset += (float)Values.skyFrameSize.X;
             }
 
-            Platform.texture = content.Load<Texture2D>(Values.txtPlatform);
+            Platform.LoadContent(content);
         }
 
         public void UnloadContent () { }
@@ -101,7 +101,9 @@ namespace Platformer
 
             if (timer.IsTimeOver())
             {
-                platforms.Add(new Platform());
+                Platform platform = new Platform();
+                platforms.Add(platform);
+
                 timer.CleanTimer();
                 timer.StartTimer();
             }
@@ -110,7 +112,7 @@ namespace Platformer
             {
                 foreach (Platform platform in platforms.ToArray())
                 {
-                    if (platform.Position.X + Platform.texture.Width < 0)
+                    if (platform.Position.X + platform.sprite.Width < 0)
                     {
                         platforms.Remove(platform);
                     }

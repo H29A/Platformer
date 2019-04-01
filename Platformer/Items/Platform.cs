@@ -11,10 +11,14 @@ namespace Platformer
         Vector2 position;
         public Vector2 Position
         {
-            get { return position; }
+            get
+            {
+                return position;
+            }
         }
 
-        static public Texture2D texture;
+        static Texture2D texture;
+        public Sprite sprite;
 
         Random random = new Random((int) DateTime.Now.Ticks);
 
@@ -22,6 +26,8 @@ namespace Platformer
 
         public Platform()
         {
+            sprite = new Sprite(texture);
+
             do
             {
                 generatedY = random.Next(100, 750);
@@ -43,7 +49,7 @@ namespace Platformer
                 {
                     if (platform.Position.Y - Values.UpperPlatformSpawnValue < value && 
                         platform.Position.Y + Values.LowerPlatformSpawnValue > value && 
-                        platform.position.X > Values.resolution.X - 1.5 * texture.Width)
+                        platform.position.X > Values.resolution.X - 1.5 * sprite.Width)
                     {
                         return false;
                     }
@@ -55,17 +61,18 @@ namespace Platformer
 
         public static void LoadContent(ContentManager content)
         {
-            texture = content.Load<Texture2D>(Values.defaultTile);
+            texture = content.Load<Texture2D>(Values.txtPlatform);
         }
 
         public void Update(GameTime gameTime)
         {
             position.X -= Values.platformsSpeed;
+            sprite.SetPosition(position);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, Color.White);
+            sprite.DrawStatic(spriteBatch);
         }
     }
 }

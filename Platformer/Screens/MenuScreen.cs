@@ -29,10 +29,7 @@ namespace Platformer
 
         string playerName = string.Empty;
 
-        public MenuScreen()
-        {
-
-        }
+        public MenuScreen() { }
 
         public override void LoadContent(ContentManager Content, InputManager inputManager)
         {
@@ -160,7 +157,7 @@ namespace Platformer
 
             IsLetterEntered(inputManager.KeyState.GetPressedKeys());
 
-            if (IsClickedOn(playButton) && (playerName != string.Empty))
+            if ((IsClickedOn(playButton) || inputManager.KeyPressed(Keys.Enter)) && (playerName != string.Empty))
             {
                 ScreenManager.Instance.AddScreen(new LevelScreen(playerName), inputManager);
             } else 

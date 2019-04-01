@@ -36,7 +36,7 @@ namespace Platformer
             
             /// Platform movement speed
             /// Скорость движения платформ
-            public const float platformsSpeed = 10f;
+            public const float platformsSpeed = 12f;
  
             /// Minimum distance (in pixels) required to turn a new platform relative to the bottom of all platforms
             /// Минимальное расстояние (в пикселях), необходимое для повления новой платформы относительно низа всех платформ

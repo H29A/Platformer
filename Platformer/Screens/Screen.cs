@@ -13,7 +13,9 @@ namespace Platformer
         public virtual void LoadContent(ContentManager Content, InputManager inputManager)
         {
             if (font == null)
+            {
                 font = Content.Load<SpriteFont>("Fonts/CyrillicFont");
+            }
 
             content = new ContentManager(Content.ServiceProvider, "Content");
             this.inputManager = inputManager;

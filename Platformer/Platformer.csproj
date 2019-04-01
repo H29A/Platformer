@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Managers\TimeManager.cs" />
     <Compile Include="Map.cs" />
-    <Compile Include="Platform.cs" />
+    <Compile Include="Items\Platform.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="JsonFiles\Scores\Scores.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -52,7 +52,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RectangleHalper.cs" />
-    <Compile Include="Sprite.cs" />
+    <Compile Include="Items\Sprite.cs" />
     <Compile Include="Timer.cs" />
     <Compile Include="Values.cs" />
     <Compile Include="Game1.cs" />

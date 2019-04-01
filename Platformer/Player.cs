@@ -7,9 +7,6 @@ namespace Platformer
 {
     public class Player
     {
-        Timer jumpTimer;
-        Timer fallTimer;
-
         string name = string.Empty;
         public string Name
         {
@@ -35,6 +32,9 @@ namespace Platformer
         Sprite sptPlayer;
         Texture2D txtPlayer;
 
+        Timer jumpTimer;
+        Timer fallTimer;
+
         bool isJumping;
         bool isFalling;
 
@@ -54,10 +54,7 @@ namespace Platformer
             sptPlayer.SetPosition(position);
         }
 
-        public void UnloadContent()
-        {
-
-        }
+        public void UnloadContent() { }
 
         public void Update(GameTime gameTime, InputManager inputManager)
         {
@@ -70,7 +67,7 @@ namespace Platformer
 
             foreach (Platform platform in Map.platforms)
             {
-                Rectangle item = new Rectangle((int)platform.Position.X, (int)platform.Position.Y, Platform.texture.Width, Platform.texture.Height);
+                Rectangle item = new Rectangle((int)platform.Position.X, (int)platform.Position.Y, (int)platform.sprite.Width, (int)platform.sprite.Height);
                 if (sptPlayer.Rect.isOnTopOf(item))
                 {
                     fallTimer.CleanTimer();

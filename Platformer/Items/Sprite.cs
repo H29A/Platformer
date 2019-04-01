@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Platformer
 {
-    class Sprite
+    public class Sprite
     {
         private Texture2D texture;
         /// The sprite's texture (Read-only)
@@ -87,6 +87,37 @@ namespace Platformer
             }
         }
 
+        /// The sprite's width with using scale factor (Read-only)
+        /// Ширина спрайта с использованным масштабным коэффициентом (только для чтения)
+        public float Width
+        {
+            get
+            {
+                return texture.Width * scaleFactor.X;
+            }
+        }
+
+        /// The sprite's width with using scale factor (Read-only)
+        /// Высота спрайта с использованным масштабным коэффициентом (только для чтения)
+        public float Height
+        {
+            get
+            {
+                return texture.Height * scaleFactor.Y;
+            }
+        }
+
+        private bool isAnimated;
+        /// Return true, if sprite is animated (Read-only)
+        /// Возвращает true, если спрайт анимирован (Только для чтения)
+        public bool IsAnimated
+        {
+            get
+            {
+                return isAnimated;
+            }
+        }
+
         /// The size and structure of whole frames sheet in animationTexture
         /// Размер структуры таблицы с кадрами анимированной текстуры
         private Point sheetSize;
@@ -130,6 +161,7 @@ namespace Platformer
         /// Констурктор для статического спарайта (не анимированного)
         public Sprite(Texture2D texture)
         {
+            isAnimated = false;
             this.texture = texture;
             position = Vector2.Zero;
             rotation = 0.0f;
@@ -142,6 +174,7 @@ namespace Platformer
         /// Констурктор для анимированного спрайта
         public Sprite(Texture2D texture, Point size, Point frameSheetSize, TimeSpan interval)
         {
+            isAnimated = true;
             this.texture = texture;
             frameSize = size;
             sheetSize = frameSheetSize;
