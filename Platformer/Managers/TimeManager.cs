@@ -61,6 +61,7 @@ namespace Platformer
             {
                 startTime = 0;
                 elapsedTime = 0;
+                residualTime = 0;
             }
         }
 

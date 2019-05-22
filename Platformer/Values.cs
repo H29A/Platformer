@@ -16,11 +16,11 @@ namespace Platformer
 
             /// Character acceleration time when falling
             /// Время ускорения персонажа при падении
-            static public TimeSpan fallTimeSpan = new TimeSpan(0, 0, 0, 0, 200); //milliseconds    
+            static public TimeSpan fallTimeSpan = new TimeSpan(0, 0, 0, 0, 150); //milliseconds    
 
             /// Delay in creating a new platform
             /// Задержка создания новой платформы
-            static public TimeSpan spawnPlatformTimeSpan = new TimeSpan(0, 0, 0, 0, 150); //milliseconds
+            static public TimeSpan spawnPlatformTimeSpan = new TimeSpan(0, 0, 0, 0, 200); //milliseconds
             
             /// Acceleration of the character at the beginning of the jump
             /// Ускорение персонажа при начале прыжка
@@ -32,19 +32,25 @@ namespace Platformer
 
             /// Character gravity
             /// Сила тяжести персонажа
-            public const float playerGravity = 0.03f;
+            public const float playerGravity = 0.04f;
             
             /// Platform movement speed
             /// Скорость движения платформ
-            public const float platformsSpeed = 12f;
+            public const float platformsSpeed = 10f;
  
-            /// Minimum distance (in pixels) required to turn a new platform relative to the bottom of all platforms
-            /// Минимальное расстояние (в пикселях), необходимое для повления новой платформы относительно низа всех платформ
-            public const float LowerPlatformSpawnValue = 120;
-            
-            /// The minimum distance (in pixels) required to turn a new platform relative to the top of all platforms
-            /// Минимальное расстояние (в пикселях), необходимое для повления новой платформы относительно верха всех платформ
-            public const float UpperPlatformSpawnValue = 120;
+            /// Minimum distance (in pixels) required to turn a new platform relative to the bottom (top) of all platforms
+            /// Минимальное расстояние (в пикселях), необходимое для повления новой платформы относительно низа (верха) всех платформ
+            public const float LowerPlatformSpawnValue = 80;      
+            public const float UpperPlatformSpawnValue = 80;
+
+            /// Resolution of the food sprite (in pixels)
+            /// Разрешение спрайта еды (в пикселях)
+            public const int FoodSpriteResolution = 80;
+
+            /// Minimum (maximum) platform generation width
+            /// Минимальная (максимальная) длина сгенерированной платформы
+            public const int LowerPlatformGenerationWidth = 100;
+            public const int UpperPlatformGenerationWidth = 180;
         #endregion
 
         #region Sprites settings
@@ -66,10 +72,18 @@ namespace Platformer
                     static public readonly Point skyTiles = new Point(5, 4);
                     static public readonly TimeSpan skyTimeSpan = new TimeSpan(0, 0, 0, 0, 50); //milliseconds
                 #endregion
+                #region Bonuses
+                    #region Coin
+                        static public readonly Point coinFrameSize = new Point(160, 160);
+                        static public readonly Point coinTiles = new Point(2, 4);
+                        static public readonly TimeSpan coinTimeSpan = new TimeSpan(0, 0, 0, 0, 30); //milliseconds
+                    #endregion
+                #endregion
                 #region Paths
                     public const string sptMenuCat = "Sprites/Animated/Menu/Cat";
                     public const string sptPlayer = "Sprites/Animated/Player/Player";
                     public const string sptSky = "Sprites/Animated/Map/Sky";  
+                    public const string sptCoin = "Sprites/Animated/Map/Bonuses/coin";
                 #endregion
             #endregion  
             #region Not animated items
@@ -98,6 +112,7 @@ namespace Platformer
 
         #region Other settings
             static public Vector2 descriptorPosition = new Vector2(518, 145);
+            static public Vector2 nameOnLevelScreenPosition = new Vector2(20, 20);
             public const int mapTileSize = 32;
         #endregion
 

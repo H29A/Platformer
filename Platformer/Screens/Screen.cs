@@ -14,7 +14,7 @@ namespace Platformer
         {
             if (font == null)
             {
-                font = Content.Load<SpriteFont>("Fonts/CyrillicFont");
+                font = Content.Load<SpriteFont>("Fonts/MainFont");
             }
 
             content = new ContentManager(Content.ServiceProvider, "Content");

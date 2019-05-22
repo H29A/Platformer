@@ -17,9 +17,13 @@ namespace Platformer
 
         Texture2D txtSky;
 
-        public Map()
+        Player player;
+
+        public Map(Player playerObj)
         {
             timer = new Timer(Values.spawnPlatformTimeSpan);
+
+            player = playerObj;
         }
 
         public void LoadContent(ContentManager content)
@@ -35,6 +39,7 @@ namespace Platformer
             }
 
             Platform.LoadContent(content);
+            Bonus.LoadContent(content);
         }
 
         public void UnloadContent () { }
@@ -101,7 +106,7 @@ namespace Platformer
 
             if (timer.IsTimeOver())
             {
-                Platform platform = new Platform();
+                Platform platform = new Platform(player);
                 platforms.Add(platform);
 
                 timer.CleanTimer();

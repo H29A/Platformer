@@ -340,6 +340,13 @@ namespace Platformer
         // Модификаторы масштабирования
         // ========================================================================
 
+        /// Sets the sprite's size given width and height in pixels
+        /// Устанавливает размер спрайта по ширине и высоте в пикселях
+        public void SetSpriteSize(int resolution)
+        {
+            scaleFactor.X = scaleFactor.Y = resolution / Width;     
+        }
+
         /// Sets the sprite's scale given the X and Y factors
         /// Устанавливает коэффициент масштабирования спрайта по float X и Y
         public void SetScale(float x, float y)

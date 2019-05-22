@@ -12,11 +12,11 @@ namespace Platformer
         {
             get
             {
-                return Name;
+                return name;
             }
             set
             {
-                Name = value;
+                name = value;
             }
         }
 
@@ -29,14 +29,37 @@ namespace Platformer
             }
         }
 
-        Sprite sptPlayer;
+        string info = string.Empty;
+        public string Info
+        {
+            get
+            {
+                return info;
+            }
+            set
+            {
+                Info = value;
+            }
+        }
+
+        public static Sprite sptPlayer;
         Texture2D txtPlayer;
 
         Timer jumpTimer;
         Timer fallTimer;
 
         bool isJumping;
-        bool isFalling;
+        bool isOnPlatform;
+        bool isSecondJumpUsed;
+
+        int coinsCount = 0;
+        public int CoinsCount
+        {
+            get
+            {
+                return coinsCount;
+            }
+        }
 
         public Player(string name)
         {
@@ -44,7 +67,10 @@ namespace Platformer
             fallTimer = new Timer(Values.fallTimeSpan);
 
             this.name = name;
+
             isJumping = false;
+            isOnPlatform = false;
+            isSecondJumpUsed = false;
         }
 
         public void LoadContent(ContentManager content)
@@ -55,6 +81,11 @@ namespace Platformer
         }
 
         public void UnloadContent() { }
+
+        public void IncCoinCount()
+        {
+            coinsCount++;
+        }
 
         public void Update(GameTime gameTime, InputManager inputManager)
         {
@@ -70,35 +101,41 @@ namespace Platformer
                 Rectangle item = new Rectangle((int)platform.Position.X, (int)platform.Position.Y, (int)platform.sprite.Width, (int)platform.sprite.Height);
                 if (sptPlayer.Rect.isOnTopOf(item))
                 {
+                    isOnPlatform = true;
+                    isSecondJumpUsed = false;
+
                     fallTimer.CleanTimer();
+
                     position.Y = item.Y - Values.playerFrameSize.Y;
 
-                    if ((inputManager.KeyDown(Keys.Space) || inputManager.KeyDown(Keys.Up)) && !isJumping)
+                    if ((inputManager.KeyPressed(Keys.Space) || inputManager.KeyPressed(Keys.Up)))
                     {
                         isJumping = true;
+                        jumpTimer.CleanTimer();
                         jumpTimer.StartTimer();
                     }
                 }
                 else 
                 {
-                    isFalling = true;
+                    isOnPlatform = false;
                 }
             }
 
             if (jumpTimer.IsTimeOver() && isJumping)
             {
-                jumpTimer.CleanTimer();
                 isJumping = false;
 
+                jumpTimer.CleanTimer();
                 fallTimer.StartTimer();
             }
+
 
             if (isJumping)
             {
                 position.Y -= jumpTimer.ResidualTime * Values.playerGravity + Values.playerJumpAcceleration;
             }
 
-            if(isFalling)
+            if (!isOnPlatform)
             {
                 if (!fallTimer.IsTimerStarted())
                 {
@@ -106,6 +143,15 @@ namespace Platformer
                 }
 
                 position.Y += fallTimer.ElapsedTime * Values.playerGravity;
+
+                if (!isSecondJumpUsed && (inputManager.KeyPressed(Keys.Space) || inputManager.KeyPressed(Keys.Up)))
+                {
+                    isJumping = true;
+                    isSecondJumpUsed = true;
+
+                    jumpTimer.CleanTimer();
+                    jumpTimer.StartTimer();
+                }
             }
         }
 

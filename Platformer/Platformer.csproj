@@ -41,6 +41,8 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Items\Bonuses\Bonus.cs" />
+    <Compile Include="Items\Bonuses\Coin.cs" />
     <Compile Include="Managers\TimeManager.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Items\Platform.cs" />

@@ -11,8 +11,8 @@ namespace Platformer
 
         public LevelScreen(string playerName)
         {
-            map = new Map();
             player = new Player(playerName);
+            map = new Map(player);
         }
 
         public override void LoadContent(ContentManager Content, InputManager inputManager)
@@ -40,6 +40,8 @@ namespace Platformer
             spriteBatch.GraphicsDevice.Clear(Color.LightBlue);
             map.Draw(spriteBatch);
             player.Draw(spriteBatch);
+
+            spriteBatch.DrawString(font, $"{player.Name}: {player.CoinsCount}", Values.nameOnLevelScreenPosition, new Color(228, 209, 209));
         }
     }
 }
