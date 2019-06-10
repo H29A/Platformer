@@ -6,7 +6,7 @@ namespace Platformer
     {
         /// Elapsed time from timer start (read-only)
         /// Пройденное время от запуска таймера (только для чтения)
-        public int ElapsedTime
+        public TimeSpan ElapsedTime
         {
             get
             {
@@ -16,7 +16,7 @@ namespace Platformer
 
         /// Remaining time until the timer ends (read-only)
         /// Оставшееся время до завершения таймера (только для чтения)
-        public int ResidualTime
+        public TimeSpan ResidualTime
         {
             get
             {

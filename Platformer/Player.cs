@@ -132,7 +132,7 @@ namespace Platformer
 
             if (isJumping)
             {
-                position.Y -= jumpTimer.ResidualTime * Values.playerGravity + Values.playerJumpAcceleration;
+                position.Y -= jumpTimer.ResidualTime.Milliseconds * Values.playerGravity + Values.playerJumpAcceleration;
             }
 
             if (!isOnPlatform)
@@ -142,7 +142,7 @@ namespace Platformer
                     fallTimer.StartTimer();
                 }
 
-                position.Y += fallTimer.ElapsedTime * Values.playerGravity;
+                position.Y += fallTimer.ElapsedTime.Milliseconds * Values.playerGravity;
 
                 if (!isSecondJumpUsed && (inputManager.KeyPressed(Keys.Space) || inputManager.KeyPressed(Keys.Up)))
                 {

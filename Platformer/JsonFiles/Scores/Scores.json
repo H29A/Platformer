@@ -1,11 +1,75 @@
 ﻿/*
   Example: {
       "name": "string_Name",
-      "score": "uint_Score",
-      "time": "uint_Time"
+      "score": "uint_Score"
   }
 */
 
 {
-  "items": []
+  "items": [
+    {
+      "name": "Test1",
+      "score": "100"
+    },
+
+    {
+      "name": "Test2",
+      "score": "111"
+    },
+
+    {
+      "name": "Test3",
+      "score": "122"
+    },
+
+    {
+      "name": "Test3",
+      "score": "122"
+    },
+
+    {
+      "name": "Test3",
+      "score": "122"
+    },
+
+    {
+      "name": "Test3",
+      "score": "122"
+    },
+
+    {
+      "name": "Test3",
+      "score": "122"
+    },
+
+    {
+      "name": "Test3",
+      "score": "122"
+    },
+
+    {
+      "name": "Test3",
+      "score": "122"
+    },
+
+    {
+      "name": "Test3",
+      "score": "122"
+    },
+
+    {
+      "name": "Test3",
+      "score": "122"
+    },
+
+    {
+      "name": "Test3",
+      "score": "122"
+    },
+
+    {
+      "name": "Test3",
+      "score": "122"
+    }
+  ]
 }

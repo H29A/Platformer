@@ -21,7 +21,11 @@ namespace Platformer
             /// Delay in creating a new platform
             /// Задержка создания новой платформы
             static public TimeSpan spawnPlatformTimeSpan = new TimeSpan(0, 0, 0, 0, 200); //milliseconds
-            
+
+            /// Time needed for level up   
+            /// Небходимо время для перехода на следующий уровень
+            static public TimeSpan timeForLevelUp = new TimeSpan(0, 0, 0, 5, 0); //seconds
+
             /// Acceleration of the character at the beginning of the jump
             /// Ускорение персонажа при начале прыжка
             public const float playerJumpAcceleration = 5f;
@@ -107,12 +111,28 @@ namespace Platformer
                     static public readonly string defaultTile = "Sprites/Not Animated/Map/Tile"; //temporally
                     static public readonly string txtPlatform = "Sprites/Not Animated/Map/Platform";
                 #endregion
+                #region Screens sources
+                    static public readonly string txtWinScreenBackgound = "Sprites/Not Animated/Screens/WinScreen";
+                    static public readonly string txtLoseScreenBackground = "Sprites/Not Animated/Screens/LoseScreen";
+                    static public readonly string txtScoresScreenBackgound= "Sprites/Not Animated/Screens/ScoresScreen";
+                #endregion
+                #region UI items
+                    static public readonly string txtScoreBar = "Sprites/Not Animated/UI/ScoreBar";
+                    static public readonly string txtScoreString = "Sprites/Not Animated/UI/ScoreString";
+                #endregion
         #endregion
         #endregion
 
         #region Other settings
-            static public Vector2 descriptorPosition = new Vector2(518, 145);
-            static public Vector2 nameOnLevelScreenPosition = new Vector2(20, 20);
+        static public Vector2 descriptorPosition = new Vector2(500, 145);
+            static public Vector2 scoreBarPosition = new Vector2(20, 20);
+            static public Vector2 levelUpTimerPosition = new Vector2(350 ,35);
+            static public Vector2 scoresPosition = new Vector2(90, 35);
+            static public Vector2 ScoresOnWinScreenPosition = new Vector2(300, 650);
+            static public Vector2 ScoresButtonOnWinScreenPosition = new Vector2(420, 690);
+            static public Vector2 ScoresOnLoseScreenPosition = new Vector2(320, 70);
+            static public Vector2 scoreStringBasePosition = new Vector2(100, 100);
+            static public Vector2 scoresDisplayingOffset = new Vector2(0, 50);
             public const int mapTileSize = 32;
         #endregion
 

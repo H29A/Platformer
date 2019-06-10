@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace Platformer
 {
@@ -29,5 +30,22 @@ namespace Platformer
 
         public virtual void Update(GameTime gameTime, Game game) { }
         public virtual void Draw(SpriteBatch spriteBatch) { }
+
+        public bool IsClickedOn(Sprite item)
+        {
+            Vector2 position = inputManager.MouseState.Position.ToVector2();
+
+            if (position.X >= item.Position.X &&
+                position.Y >= item.Position.Y &&
+                position.X <= item.Position.X + item.Texture.Width &&
+                position.Y <= item.Position.Y + item.Texture.Height &&
+                inputManager.MouseState.LeftButton == ButtonState.Released &&
+                inputManager.PrevMouseState.LeftButton == ButtonState.Pressed)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

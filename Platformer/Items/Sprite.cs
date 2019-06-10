@@ -347,6 +347,12 @@ namespace Platformer
             scaleFactor.X = scaleFactor.Y = resolution / Width;     
         }
 
+        public void SetSpriteSize(Vector2 resolution)
+        {
+            scaleFactor.X = resolution.X / Width;
+            scaleFactor.Y = resolution.Y / Height;
+        }
+
         /// Sets the sprite's scale given the X and Y factors
         /// Устанавливает коэффициент масштабирования спрайта по float X и Y
         public void SetScale(float x, float y)

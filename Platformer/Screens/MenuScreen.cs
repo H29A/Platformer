@@ -66,23 +66,6 @@ namespace Platformer
             content.Unload();
         }
 
-        private bool IsClickedOn(Sprite item)
-        {
-            Vector2 position = inputManager.MouseState.Position.ToVector2();
-
-            if (position.X >= item.Position.X &&
-                position.Y >= item.Position.Y &&
-                position.X <= item.Position.X + item.Texture.Width &&
-                position.Y <= item.Position.Y + item.Texture.Height &&
-                inputManager.MouseState.LeftButton == ButtonState.Released &&
-                inputManager.PrevMouseState.LeftButton == ButtonState.Pressed)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         public void IsLetterEntered(Keys[] keyArray)
         {
             string toStringKeys;
@@ -97,7 +80,7 @@ namespace Platformer
                         Values.descriptorPosition.X += 7.5f;
                     }
                     else 
-                    if (playerName.Length < 8 &&
+                    if (playerName.Length < 6 &&
                              key.GetHashCode() >= 65 &&
                              key.GetHashCode() <= 90 ||
                              key == Keys.OemOpenBrackets ||

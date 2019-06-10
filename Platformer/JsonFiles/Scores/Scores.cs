@@ -15,15 +15,12 @@ namespace Platformer
         [JsonProperty("name")]
         public string Name { get; set; }
         [JsonProperty("score")]
-        public uint Score { get; set; }
-        [JsonProperty("time")]
-        public uint Time { get; set; }
+        public int Score { get; set; }
 
-        public ScoreItem(string name, uint score, uint time)
+        public ScoreItem(string name, int score)
         {
             Name = name;
             Score = score;
-            Time = time;
         }
     }
 }

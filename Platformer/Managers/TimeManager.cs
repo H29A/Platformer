@@ -8,23 +8,23 @@ namespace Platformer
     {
         /// Current game time relative to the total playing time
         /// Текущее игровое время относительно всего игрового времени
-        public int time;
+        protected TimeSpan time;
 
         /// Timer start relative to the total playing time
         /// Время запуска таймера относительно всего игрового времени
-        public int startTime;
+        protected TimeSpan startTime;
 
         /// Timer length
         /// Длинна таймера
-        public TimeSpan duration;
+        protected TimeSpan duration;
 
         /// Remaining time until the timer ends
         /// Оставшееся время до завершения таймера
-        public int residualTime;
+        protected TimeSpan residualTime;
 
         /// Elapsed time from timer start
         /// Пройденное время от запуска таймера
-        public int elapsedTime;
+        protected TimeSpan elapsedTime;
 
         /// The main method of updating the timer state
         /// Главный метод обновления состояния таймера
@@ -32,14 +32,14 @@ namespace Platformer
         {
             /// Global time update
             /// Обновление глобального времени
-            time += gameTime.ElapsedGameTime.Milliseconds;
+            time += gameTime.ElapsedGameTime;
 
             /// Updating the state of the running timer
             /// Обновление состояния запущенного таймера
             if (IsTimerStarted() && !IsTimeOver())
             {
                 elapsedTime = time - startTime;
-                residualTime = (int)duration.TotalMilliseconds - elapsedTime;
+                residualTime = duration - elapsedTime;
             }
         }
 
@@ -59,9 +59,9 @@ namespace Platformer
         {
             if (IsTimerStarted())
             {
-                startTime = 0;
-                elapsedTime = 0;
-                residualTime = 0;
+                startTime = TimeSpan.Zero;
+                elapsedTime = TimeSpan.Zero;
+                residualTime = TimeSpan.Zero;
             }
         }
 
@@ -69,7 +69,7 @@ namespace Platformer
         /// Возвращает true, если таймер запущен
         public bool IsTimerStarted()
         {
-            if (startTime > 0)
+            if (startTime > TimeSpan.Zero)
             {
                 return true;
             }
@@ -80,7 +80,7 @@ namespace Platformer
         /// Возвращает true, если таймер завершил отсчет 
         public bool IsTimeOver()
         {
-            if (IsTimerStarted() && (elapsedTime >= duration.Milliseconds))
+            if (IsTimerStarted() && (elapsedTime >= duration))
             {
                 return true;
             }
