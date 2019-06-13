@@ -20,11 +20,11 @@ namespace Platformer
 
             /// Delay in creating a new platform
             /// Задержка создания новой платформы
-            static public TimeSpan spawnPlatformTimeSpan = new TimeSpan(0, 0, 0, 0, 200); //milliseconds
+            static public TimeSpan spawnPlatformTimeSpan = new TimeSpan(0, 0, 0, 0, 150); //milliseconds
 
             /// Time needed for level up   
             /// Небходимо время для перехода на следующий уровень
-            static public TimeSpan timeForLevelUp = new TimeSpan(0, 0, 0, 5, 0); //seconds
+            static public TimeSpan timeForLevelUp = new TimeSpan(0, 0, 1, 0, 0); //seconds
 
             /// Acceleration of the character at the beginning of the jump
             /// Ускорение персонажа при начале прыжка
@@ -55,11 +55,13 @@ namespace Platformer
             /// Минимальная (максимальная) длина сгенерированной платформы
             public const int LowerPlatformGenerationWidth = 100;
             public const int UpperPlatformGenerationWidth = 180;
+
+            static public TimeSpan AlertDisplayingDuration = new TimeSpan(0, 0, 0, 3, 0);
         #endregion
 
         #region Sprites settings
-            #region Animated items
-                #region Menu cat sprite
+        #region Animated items
+        #region Menu cat sprite
                     static public readonly Vector2 menuCatPosition = new Vector2(260, 210);
                     static public readonly Point menuCatFrameSize = new Point(500, 456);
                     static public readonly Point menuCatTiles = new Point(6, 7);
@@ -136,7 +138,9 @@ namespace Platformer
             static public Vector2 scoresStringSpriteSize = new Vector2(200, 40);
             static public Color mainColor = new Color(228, 209, 209);
             static public Color highlightColor = new Color(228, 23, 2);
-        public const int mapTileSize = 32;
+            public const int mapTileSize = 32;
+            static public readonly string backgroundSong = "Sounds/BackgroundMusic";
+            static public Vector2 alertPosition = new Vector2(390, 135);
         #endregion
 
         #region Json paths

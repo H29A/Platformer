@@ -42,14 +42,9 @@ namespace Platformer
         {
             inputManager.Update();
 
-            if (IsClickedOn(scoresTableButton))
+            if (IsClickedOn(scoresTableButton) || inputManager.KeyPressed(Keys.Escape))
             {
                 ScreenManager.Instance.AddScreen(new ScoresScreen(player), inputManager);
-            }
-            else
-            if (inputManager.KeyPressed(Keys.Escape))
-            {
-                ScreenManager.Instance.AddScreen(new MenuScreen(), inputManager);
             }
         }
 

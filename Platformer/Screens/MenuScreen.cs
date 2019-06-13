@@ -27,9 +27,14 @@ namespace Platformer
         Sprite sptMenuCat;
         Texture2D txtMenuCat;
 
+        Vector2 descriptor;
+
         string playerName = string.Empty;
 
-        public MenuScreen() { }
+        public MenuScreen()
+        {
+            descriptor = Values.descriptorPosition;
+        }
 
         public override void LoadContent(ContentManager Content, InputManager inputManager)
         {
@@ -77,7 +82,7 @@ namespace Platformer
                     if (key == Keys.Back && playerName.Length > 0)
                     {
                         playerName = playerName.Remove(playerName.Length - 1, 1);
-                        Values.descriptorPosition.X += 7.5f;
+                        descriptor.X += 7.5f;
                     }
                     else 
                     if (playerName.Length < 6 &&
@@ -127,7 +132,7 @@ namespace Platformer
                             default: toStringKeys = Convert.ToString((Keys)key); break;
                         }
                         playerName += toStringKeys;
-                        Values.descriptorPosition.X -= 7.5f;
+                        descriptor.X -= 7.5f;
                     }
                 }
             }
@@ -163,7 +168,12 @@ namespace Platformer
             playButton.DrawStatic(spriteBatch);
             exitButton.DrawStatic(spriteBatch);
             scoresButton.DrawStatic(spriteBatch);
-            spriteBatch.DrawString(font, playerName, Values.descriptorPosition, new Color(228, 209, 209));
+            spriteBatch.DrawString(font, playerName, descriptor, Values.mainColor);
+
+            if (playerName == string.Empty)
+            {
+                spriteBatch.DrawString(font, "Введите имя игрока!", Values.alertPosition, Values.mainColor);
+            }
         }
     }
 }

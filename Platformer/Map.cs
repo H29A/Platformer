@@ -24,6 +24,8 @@ namespace Platformer
             timer = new Timer(Values.spawnPlatformTimeSpan);
 
             player = playerObj;
+
+            platforms.Clear();
         }
 
         public void LoadContent(ContentManager content)

@@ -70,7 +70,7 @@ namespace Platformer
             player.Draw(spriteBatch);
             ScoreBar.DrawStatic(spriteBatch);
             spriteBatch.DrawString(font, $"{player.Name}: {player.CoinsCount}", Values.scoresPosition, new Color(228, 209, 209));
-            spriteBatch.DrawString(font, $"До повышения уровня {(int)winTimer.ResidualTime.TotalSeconds} секунд!", Values.levelUpTimerPosition, new Color(228, 209, 209));
+            spriteBatch.DrawString(font, $"До окончания уровня {(int)winTimer.ResidualTime.TotalSeconds} секунд!", Values.levelUpTimerPosition, new Color(228, 209, 209));
         }
     }
 }

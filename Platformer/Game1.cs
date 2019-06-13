@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Graphics;
+
 
 namespace Platformer
 {
@@ -8,10 +10,14 @@ namespace Platformer
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        Song backgroundSong;
+        bool isSongStarted;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            isSongStarted = false;
         }
 
         protected override void Initialize()
@@ -32,12 +38,19 @@ namespace Platformer
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ScreenManager.Instance.LoadContent(Content);
+
+            backgroundSong = Content.Load<Song>(Values.backgroundSong);
         }
 
         protected override void UnloadContent() { }
 
         protected override void Update(GameTime gameTime)
         {
+            if (!isSongStarted)
+            {
+                MediaPlayer.Play(backgroundSong);
+                isSongStarted = true;
+            }
             ScreenManager.Instance.Update(gameTime, this);
             base.Update(gameTime);
         }
