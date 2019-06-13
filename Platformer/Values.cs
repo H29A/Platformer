@@ -124,16 +124,19 @@ namespace Platformer
         #endregion
 
         #region Other settings
-        static public Vector2 descriptorPosition = new Vector2(500, 145);
+            static public Vector2 descriptorPosition = new Vector2(500, 145);
             static public Vector2 scoreBarPosition = new Vector2(20, 20);
             static public Vector2 levelUpTimerPosition = new Vector2(350 ,35);
             static public Vector2 scoresPosition = new Vector2(90, 35);
             static public Vector2 ScoresOnWinScreenPosition = new Vector2(300, 650);
             static public Vector2 ScoresButtonOnWinScreenPosition = new Vector2(420, 690);
             static public Vector2 ScoresOnLoseScreenPosition = new Vector2(320, 70);
-            static public Vector2 scoreStringBasePosition = new Vector2(100, 100);
+            static public Vector2 scoreStringBasePosition = new Vector2(200, 100);
             static public Vector2 scoresDisplayingOffset = new Vector2(0, 50);
-            public const int mapTileSize = 32;
+            static public Vector2 scoresStringSpriteSize = new Vector2(200, 40);
+            static public Color mainColor = new Color(228, 209, 209);
+            static public Color highlightColor = new Color(228, 23, 2);
+        public const int mapTileSize = 32;
         #endregion
 
         #region Json paths

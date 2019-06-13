@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
@@ -37,7 +39,17 @@ namespace Platformer
             this.player = player;
 
             scoresObj = JsonConvert.DeserializeObject<Scores>(File.ReadAllText(Values.scoresJsonPath));
-            scoresObj.Items.Add(new ScoreItem(player.Name, player.CoinsCount));
+
+            foreach (ScoreItem score in scoresObj.Items)
+            {
+                if (score.IsLast)
+                {
+                    score.IsLast = false;
+                }
+            }
+
+            scoresObj.Items.Add(new ScoreItem(player.Name, player.CoinsCount, true));
+            scoresObj.Items = scoresObj.Items.OrderByDescending(scoreString => scoreString.Score).ToList<ScoreItem>();
             File.WriteAllText(Values.scoresJsonPath, JsonConvert.SerializeObject(scoresObj, Formatting.Indented));
         }
 
@@ -45,13 +57,20 @@ namespace Platformer
         {
             for(int i = 0; i < scoresObj.Items.Count; i++)
             {
+                if (i > 20)
+                {
+                    break;
+                }
+
                 if (i == 10)
                 {
-                    scoreStringPosition += new Vector2(200, 0);
+                    scoreStringPosition = new Vector2(640, Values.scoreStringBasePosition.Y);
                 }
+
                 scoreStringPosition += Values.scoresDisplayingOffset;
                 scoresStrings.Add(new Sprite(txtScoreString));
                 scoresStrings[i].SetPosition(scoreStringPosition);
+                scoresStrings[i].SetSpriteSize(Values.scoresStringSpriteSize);
             }
         }
 
@@ -92,9 +111,20 @@ namespace Platformer
             background.DrawStatic(spriteBatch);
             exitButton.DrawStatic(spriteBatch);
 
-            foreach (Sprite scoreString in scoresStrings)
+            for (int i = 0; i < scoresStrings.Count; i++)
             {
-                scoreString.DrawStatic(spriteBatch);
+                if (i >= 20)
+                {
+                    break;
+                }
+
+                if (scoresObj.Items[i].IsLast)
+                {
+                    spriteBatch.DrawString(font, $"В последний раз игрок {scoresObj.Items[i].Name} занял {i + 1} место, его очки: {scoresObj.Items[i].Score}", new Vector2(170, 70), Values.highlightColor);
+                }
+
+                scoresStrings[i].DrawStatic(spriteBatch);
+                spriteBatch.DrawString(font, $"{i + 1}. {scoresObj.Items[i].Name}: {scoresObj.Items[i].Score}", scoresStrings[i].Position + new Vector2(15, 5), scoresObj.Items[i].IsLast ? Values.highlightColor : Values.mainColor);
             }
         }
     }
