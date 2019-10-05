@@ -20,7 +20,7 @@ namespace Platformer
             }
         }
 
-        Vector2 position = Values.playerStartPosition;
+        public static Vector2 position = Values.playerStartPosition;
         public Vector2 Position
         {
             get
@@ -51,6 +51,10 @@ namespace Platformer
         bool isJumping;
         bool isOnPlatform;
         bool isSecondJumpUsed;
+        public static bool isUnderBonus;
+        public static bool isOnLevelTwo;
+
+        public static Timer BonusTimer = new Timer(Values.bonusTimerSpan);
 
         int coinsCount = 0;
         public int CoinsCount
@@ -71,13 +75,15 @@ namespace Platformer
             isJumping = false;
             isOnPlatform = false;
             isSecondJumpUsed = false;
+            isUnderBonus = false;
+            isOnLevelTwo = false;
         }
 
         public void LoadContent(ContentManager content)
         {
             txtPlayer = content.Load<Texture2D>(Values.sptPlayer);
             sptPlayer = new Sprite(txtPlayer, Values.playerFrameSize, Values.playerTiles, Values.playerTimeSpan);
-            sptPlayer.SetPosition(position);
+            sptPlayer.SetPosition(Values.playerStartPosition);
         }
 
         public void UnloadContent() { }
@@ -91,6 +97,19 @@ namespace Platformer
         {
             jumpTimer.Update(gameTime);
             fallTimer.Update(gameTime);
+            BonusTimer.Update(gameTime);
+
+            if (isUnderBonus && !BonusTimer.IsTimerStarted())
+            {
+                BonusTimer.StartTimer();
+            }
+
+            if (BonusTimer.IsTimeOver())
+            {
+                isUnderBonus = false;
+                BonusTimer.CleanTimer();
+            }
+
 
             sptPlayer.SetPosition(position);
             sptPlayer.SetRect((int)position.X, (int)position.Y, (int)Values.playerFrameSize.X, (int)Values.playerFrameSize.Y);

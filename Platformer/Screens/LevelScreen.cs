@@ -10,6 +10,7 @@ namespace Platformer
     {
         Map map;
         Player player;
+        Timer nextLevelTimer;
         Timer winTimer;
 
         Sprite ScoreBar;
@@ -19,7 +20,8 @@ namespace Platformer
         {
             player = new Player(playerName);
             map = new Map(player);
-            winTimer = new Timer(Values.timeForLevelUp);
+            nextLevelTimer = new Timer(Values.timeForLevelUp);
+            winTimer = new Timer(Values.timeForWin);
         }
 
         public override void LoadContent(ContentManager Content, InputManager inputManager)
@@ -41,21 +43,31 @@ namespace Platformer
 
         public override void Update(GameTime gameTime, Game game)
         {
-            if (!winTimer.IsTimerStarted())
+            if (!Player.isOnLevelTwo && !nextLevelTimer.IsTimerStarted())
             {
-                winTimer.StartTimer();
+                nextLevelTimer.StartTimer();
             }
 
+            nextLevelTimer.Update(gameTime);
             winTimer.Update(gameTime);
+
             inputManager.Update();
             map.Update(gameTime);
             player.Update(gameTime, inputManager);
 
-            if (winTimer.ElapsedTime >= Values.timeForLevelUp)
+            if (!Player.isOnLevelTwo && nextLevelTimer.IsTimeOver())
+            {
+                nextLevelTimer.CleanTimer();
+                winTimer.StartTimer();
+                Player.isOnLevelTwo = true;
+            }
+
+            if (Player.isOnLevelTwo && winTimer.IsTimeOver())
             {
                 winTimer.CleanTimer();
                 ScreenManager.Instance.AddScreen(new WinScreen(player), inputManager);
             }
+            
 
             if (player.Position.Y > Values.resolution.Y)
             {
@@ -70,7 +82,7 @@ namespace Platformer
             player.Draw(spriteBatch);
             ScoreBar.DrawStatic(spriteBatch);
             spriteBatch.DrawString(font, $"{player.Name}: {player.CoinsCount}", Values.scoresPosition, new Color(228, 209, 209));
-            spriteBatch.DrawString(font, $"До окончания уровня {(int)winTimer.ResidualTime.TotalSeconds} секунд!", Values.levelUpTimerPosition, new Color(228, 209, 209));
+            spriteBatch.DrawString(font, $"До окончания {(Player.isOnLevelTwo ? 2 : 1)} уровня {(Player.isOnLevelTwo ? (int)winTimer.ResidualTime.TotalSeconds : (int)nextLevelTimer.ResidualTime.TotalSeconds)} секунд!", Values.levelUpTimerPosition, new Color(228, 209, 209));
         }
     }
 }

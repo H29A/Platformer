@@ -5,22 +5,6 @@ namespace Platformer
 {
     public class Coin : Bonus
     {
-        public Sprite Sprite
-        {
-            get
-            {
-                return sprite;
-            }
-        }
-
-        public Vector2 Position
-        {
-            get
-            {
-                return position;
-            }
-        }
-
         public Coin(Vector2 position)
         {
             sprite = new Sprite(Bonus.txtCoin, Values.coinFrameSize, Values.coinTiles, Values.coinTimeSpan);
@@ -29,16 +13,39 @@ namespace Platformer
             sprite.SetSpriteSize(Values.FoodSpriteResolution);
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-            this.position.X -= Values.platformsSpeed;
-            sprite.SetPosition(this.position);
-            sprite.SetRect((int)this.position.X, (int)this.position.Y, Values.FoodSpriteResolution, Values.FoodSpriteResolution);
+            if (Player.isUnderBonus)
+            {
+                if (this.position.X > Player.position.X)
+                {
+                    this.position.X -= Values.platformsSpeed * 2;
+                }
+                else if (this.position.X < Player.position.X)
+                {
+                    this.position.X += Values.platformsSpeed * 2;
+                }
 
-            sprite.Update(gameTime);
+                if (this.position.Y > Player.position.Y + 10)
+                {
+                    this.position.Y -= 5;
+                }
+                else if (this.position.Y < Player.position.Y - 10)
+                {
+                    this.position.Y += 5;
+                }
+            }
+            else
+            {
+                this.position.X -= Player.isOnLevelTwo ? Values.nextLevelSpeed : Values.platformsSpeed;
+            }
+
+            sprite.SetPosition(this.position);
+
+            base.Update(gameTime);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             sprite.DrawAnimated(spriteBatch);
         }

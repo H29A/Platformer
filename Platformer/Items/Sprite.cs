@@ -248,6 +248,17 @@ namespace Platformer
                               origin, scaleFactor, SpriteEffects.None, 0.0f);
         }
 
+        public void DrawStatic(SpriteBatch spriteBatch, Color color)
+        {
+            spriteBatch.Draw(texture, position, rect, color, rotation,
+                              origin, scaleFactor, SpriteEffects.None, 0.0f);
+        }
+
+        public void DrawStaticWithoutRect(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, position, Color.White);
+        }
+
         public void DrawAnimated(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, new Rectangle(

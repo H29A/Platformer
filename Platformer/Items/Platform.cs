@@ -96,30 +96,47 @@ namespace Platformer
 
             for (int i = 0; i < maxSlotsCount; i++)
             {
-                if (NextBool(random, 35))
+                if (NextBool(random, 3))
+                {
+                    if (bonuses.Count > 0)
+                    {
+                        break;
+                    }
+
+                    bonuses.Add(new Magnet(slot));
+                    slot = new Vector2(slot.X + Values.FoodSpriteResolution, slot.Y);
+                } else if (NextBool(random, 35))
                 {
                     bonuses.Add(new Coin(slot));
+                    slot = new Vector2(slot.X + Values.FoodSpriteResolution, slot.Y);
                 }
-
-                slot = new Vector2(slot.X + Values.FoodSpriteResolution, slot.Y);
             }
         }
 
         public void Update(GameTime gameTime)
         {
-            position.X -= Values.platformsSpeed;
+
+            position.X -= Player.isOnLevelTwo ? Values.nextLevelSpeed : Values.platformsSpeed;
             sprite.SetPosition(position);
 
             if (bonuses.Count > 0)
             {
-                foreach (Coin bonus in bonuses.ToArray())
+                foreach (Bonus bonus in bonuses.ToArray())
                 {
                     bonus.Update(gameTime);
 
                     if (Player.sptPlayer.Rect.Intersects(bonus.Sprite.Rect))
                     {
                         bonuses.Remove(bonus);
-                        player.IncCoinCount();
+
+                        if (bonus.Sprite.Texture.Name == Values.sptCoin)
+                        {
+                            player.IncCoinCount();
+                        }
+                        else if (bonus.Sprite.Texture.Name == Values.txtMeat && !Player.isUnderBonus)
+                        {
+                            Player.isUnderBonus = true;
+                        }
                     }
                 }
             }
@@ -127,11 +144,17 @@ namespace Platformer
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            sprite.DrawStatic(spriteBatch);
+            if (Player.isOnLevelTwo)
+            {
+                sprite.DrawStatic(spriteBatch, Color.Red);
+            } else
+            {
+                sprite.DrawStatic(spriteBatch);
+            }
 
             if (bonuses.Count > 0)
             {
-                foreach (Coin bonus in bonuses)
+                foreach (Bonus bonus in bonuses)
                 {
                     bonus.Draw(spriteBatch);
                 }

@@ -18,6 +18,8 @@ namespace Platformer
         public LoseScreen(Player player)
         {
             this.player = player;
+            Player.position = Values.playerStartPosition;
+            Player.isOnLevelTwo = false;
         }
 
         public override void LoadContent(ContentManager Content, InputManager inputManager)

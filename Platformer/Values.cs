@@ -22,9 +22,17 @@ namespace Platformer
             /// Задержка создания новой платформы
             static public TimeSpan spawnPlatformTimeSpan = new TimeSpan(0, 0, 0, 0, 150); //milliseconds
 
+            /// Time during which bonus is active
+            /// Время в течении которого бонус активен
+            static public TimeSpan bonusTimerSpan = new TimeSpan(0, 0, 0, 2, 0); //seconds
+
             /// Time needed for level up   
             /// Небходимо время для перехода на следующий уровень
-            static public TimeSpan timeForLevelUp = new TimeSpan(0, 0, 1, 0, 0); //seconds
+            static public TimeSpan timeForLevelUp = new TimeSpan(0, 0, 0, 15, 0); //seconds
+
+            /// Time needed for win   
+            /// Небходимо время для победы
+            static public TimeSpan timeForWin = new TimeSpan(0, 0, 0, 15, 0);
 
             /// Acceleration of the character at the beginning of the jump
             /// Ускорение персонажа при начале прыжка
@@ -41,6 +49,7 @@ namespace Platformer
             /// Platform movement speed
             /// Скорость движения платформ
             public const float platformsSpeed = 10f;
+            public const float nextLevelSpeed = platformsSpeed * 2;
  
             /// Minimum distance (in pixels) required to turn a new platform relative to the bottom (top) of all platforms
             /// Минимальное расстояние (в пикселях), необходимое для повления новой платформы относительно низа (верха) всех платформ
@@ -50,6 +59,7 @@ namespace Platformer
             /// Resolution of the food sprite (in pixels)
             /// Разрешение спрайта еды (в пикселях)
             public const int FoodSpriteResolution = 80;
+            public const int MeatSpriteResolution = 50;
 
             /// Minimum (maximum) platform generation width
             /// Минимальная (максимальная) длина сгенерированной платформы
@@ -60,8 +70,8 @@ namespace Platformer
         #endregion
 
         #region Sprites settings
-        #region Animated items
-        #region Menu cat sprite
+            #region Animated items
+                #region Menu cat sprite
                     static public readonly Vector2 menuCatPosition = new Vector2(260, 210);
                     static public readonly Point menuCatFrameSize = new Point(500, 456);
                     static public readonly Point menuCatTiles = new Point(6, 7);
@@ -110,8 +120,9 @@ namespace Platformer
                 #endregion
                 #region Map items
                     static public readonly string txtSky = "Sprites/Not Animated/Map/Background";
-                    static public readonly string defaultTile = "Sprites/Not Animated/Map/Tile"; //temporally
+                    static public readonly string defaultTile = "Sprites/Not Animated/Map/Tile";
                     static public readonly string txtPlatform = "Sprites/Not Animated/Map/Platform";
+                    static public readonly string txtMeat = "Sprites/Not Animated/Map/Meat";
                 #endregion
                 #region Screens sources
                     static public readonly string txtWinScreenBackgound = "Sprites/Not Animated/Screens/WinScreen";
@@ -122,7 +133,7 @@ namespace Platformer
                     static public readonly string txtScoreBar = "Sprites/Not Animated/UI/ScoreBar";
                     static public readonly string txtScoreString = "Sprites/Not Animated/UI/ScoreString";
                 #endregion
-        #endregion
+            #endregion
         #endregion
 
         #region Other settings
